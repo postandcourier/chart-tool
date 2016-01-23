@@ -199,7 +199,7 @@ function getTranslateXY(node) {
  * @return {String}
  */
 function translate(x, y) {
-    return "translate(" + x + ", " + y + ")";
+  return "translate(" + x + ", " + y + ")";
 }
 
 /**

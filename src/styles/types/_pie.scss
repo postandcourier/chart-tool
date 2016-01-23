@@ -1,0 +1,56 @@
+.#{$prefix}type_pie {
+
+  .#{$prefix}arc {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: $line-stroke-width;
+    stroke: $white;
+  }
+
+  .#{$prefix}arc-text {
+    fill: $text;
+    stroke: none;
+  }
+
+  .#{$prefix}arc-text-key {
+    font-weight: bold;
+  }
+
+  .#{$prefix}arc-rect {
+    stroke: none;
+    fill: $text;
+  }
+
+  .#{$prefix}arc-polyline {
+    stroke: $text;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+}
+
+.#{$prefix}primary.#{$prefix}type_pie {
+
+  .#{$prefix}arc {
+    fill: $primary-shade-2;
+  }
+
+  .#{$prefix}arc-0 {
+    fill: $primary-color;
+  }
+
+}
+
+.#{$prefix}alternate.#{$prefix}type_pie {
+
+  .#{$prefix}arc {
+    fill: $alternate-shade-2;
+  }
+
+  .#{$prefix}arc-0 {
+    fill: $alternate-color;
+  }
+
+}

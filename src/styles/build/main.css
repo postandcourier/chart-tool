@@ -519,6 +519,42 @@
 .ct-alternate.ct-type_bar .ct-series_group .ct-bar-5 rect {
   fill: #fee5d9; }
 
+.ct-type_pie .ct-arc {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+  stroke: #fff; }
+
+.ct-type_pie .ct-arc-text {
+  fill: #333;
+  stroke: none; }
+
+.ct-type_pie .ct-arc-text-key {
+  font-weight: bold; }
+
+.ct-type_pie .ct-arc-rect {
+  stroke: none;
+  fill: #333; }
+
+.ct-type_pie .ct-arc-polyline {
+  stroke: #333;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+  fill: none; }
+
+.ct-primary.ct-type_pie .ct-arc {
+  fill: #6baed6; }
+
+.ct-primary.ct-type_pie .ct-arc-0 {
+  fill: #08519c; }
+
+.ct-alternate.ct-type_pie .ct-arc {
+  fill: #fb6a4a; }
+
+.ct-alternate.ct-type_pie .ct-arc-0 {
+  fill: #a50f15; }
+
 .ct-primary.ct-type_stream .ct-series_group .ct-series .ct-stream-series {
   fill: #3182bd; }
 

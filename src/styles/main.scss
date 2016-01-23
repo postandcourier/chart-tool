@@ -7,12 +7,13 @@
 @import "./components/credit";
 @import "./components/tips";
 
-@import "./types/series-line";
-@import "./types/series-multiline";
-@import "./types/series-area";
-@import "./types/series-bar";
-@import "./types/series-stream";
-@import "./types/series-column";
+@import "./types/line";
+@import "./types/multiline";
+@import "./types/area";
+@import "./types/bar";
+@import "./types/pie";
+@import "./types/stream";
+@import "./types/column";
 
 // @import "debug";
 

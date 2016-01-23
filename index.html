@@ -21,6 +21,56 @@
   <div class="wrapper">
     <h1>This is a test file for the front-end lib.</h1>
 
+    <div class="ct-chart" data-chartid="ct-pie">
+      <script>
+        (function(root) {
+          var data = {
+            "version": "1.0.2",
+            "id": "pie",
+            "heading": "Ontario emissions by sector, 2015",
+            "qualifier": "Herp derp",
+            "source": "THE GLOBE AND MAIL » SOURCE: Statistics Canada",
+            "chart": {
+              "class": "primary",
+              "data": "Sector,Emissions\nTransportation,23\nIndustry,30\nBuildings,17\nElectricity,9\nOther,1",
+              "x_axis": {
+                "scale": "linear",
+                "ticks": "auto",
+                "orient": "bottom",
+                "format": "auto",
+                "nice": true,
+                "prefix": "€"
+              },
+              "y_axis": {
+                "scale": "ordinal",
+                "ticks": "auto",
+                "orient": "right"
+              },
+              "options": {
+                "type": "pie",
+                "interpolation": false,
+                "stacked": false,
+                "expanded": false,
+                "head": true,
+                "deck": false,
+                "legend": true,
+                "footer": true,
+                "x_axis": false,
+                "y_axis": false,
+                "tips": false,
+                "annotations": false,
+                "range": false,
+                "series": false,
+                "qualifier": false
+              }
+            }
+          };
+          root.__charttool = root.__charttool || [];
+          root.__charttool.push({id: 'ct-pie', data: data});
+        })(this);
+      </script>
+    </div>
+
     <!-- GLOBE CHART v1.0.2-18 -->
     <!-- edited: Sun Jun 28 2015 16:07:29 GMT-0400 (EDT) -->
     <!-- slug: rb-b1-stuff-0628-2 -->

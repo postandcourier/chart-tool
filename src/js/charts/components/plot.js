@@ -7,6 +7,7 @@ function plot(node, obj) {
     stackedArea: require("../types/stacked-area"),
     column: require("../types/column"),
     bar: require("../types/bar"),
+    pie: require("../types/pie"),
     stackedColumn: require("../types/stacked-column"),
     streamgraph: require("../types/streamgraph")
   };
@@ -29,6 +30,10 @@ function plot(node, obj) {
 
     case "bar":
       chartRef = draw.bar(node, obj);
+      break;
+
+    case "pie":
+      chartRef = draw.pie(node, obj);
       break;
 
     case "column":
