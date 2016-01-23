@@ -95,7 +95,7 @@ function PieChart(node, obj) {
       return midAngle(d) < Math.PI ? "end" : "start";
     });
 
-  // relax(arcText);
+  relax(arcText);
 
   var polyline = arcGroup.append("polyline")
     .attr({
@@ -130,54 +130,55 @@ function relax(selection) {
   var getTranslate = require("../../utils/utils").getTranslateXY,
       setTranslate = require("../../utils/utils").translate;
 
-  alpha = 0.5;
+  alpha = 3;
   spacing = 12;
   again = false;
   selection.each(function(d, i) {
     var a = this;
     var da = d3.select(a);
 
-    var x1 = getTranslate(a)[0];
-    var y1 = getTranslate(a)[1];
+    var x1 = getTranslate(a)[0],
+        y1 = getTranslate(a)[1];
+
+    var aHeight = a.getBBox().height;
+
+    console.log(d.data.key);
 
     selection.each(function() {
       var b = this;
 
-      // a & b are the same element and don't collide.
       if (a == b) return;
 
       var db = d3.select(b);
 
-      // a & b are on opposite sides of the chart and don't collide
-      if (da.attr("text-anchor") != db.attr("text-anchor")) return;
+      var bHeight = b.getBBox().height;
 
-      // Now let's calculate the distance between
-      // these elements.
+      if (da.style("text-anchor") != db.style("text-anchor")) return;
+
+      x1 = getTranslate(a)[0];
+      y1 = getTranslate(a)[1];
 
       var x2 = getTranslate(b)[0];
       var y2 = getTranslate(b)[1];
 
-      var deltaY = y1 - y2;
+      var deltaY = Math.abs(Math.abs(y1) - Math.abs(y2));
+
+      if (deltaY > spacing + aHeight) return;
+
+      again = true;
+
+      var newY1 = y1 > 0 ? y1 + alpha : y1 - alpha;
+      var newY2 = y2 > 0 ? y2 - alpha : y2 + alpha;
+
+      da.attr("transform", setTranslate(x1, newY1));
+      db.attr("transform", setTranslate(x2, newY2));
 
       debugger;
 
-      // Our spacing is greater than our specified spacing,
-      // so they don't collide.
-      if (Math.abs(deltaY) > spacing) return;
-
-      // If the labels collide, we'll push each
-      // of the two labels up and down a little bit.
-      again = true;
-      sign = deltaY > 0 ? 1 : -1;
-      adjust = sign * alpha;
-
-      da.attr("translate", setTranslate([x1, (+y1 + adjust)]));
-      db.attr("translate", setTranslate([x2, (+y2 - adjust)]));
-
-      // da.attr("y", +y1 + adjust);
-      // db.attr("y", +y2 - adjust);
     });
   });
+
+  if (again) { relax(selection); }
 }
 
 module.exports = PieChart;
