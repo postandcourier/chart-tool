@@ -95,7 +95,7 @@ function PieChart(node, obj) {
       return midAngle(d) < Math.PI ? "end" : "start";
     });
 
-  relax(arcText);
+  // relax(arcText);
 
   var polyline = arcGroup.append("polyline")
     .attr({
@@ -116,7 +116,7 @@ function PieChart(node, obj) {
     arc: arc,
     seriesGroup: seriesGroup,
     arcGroup: arcGroup,
-    arcText: arcText
+    // arcText: arcText
   };
 
 }
