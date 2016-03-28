@@ -1,3 +1,14 @@
+// var Positioning = new ReactiveVar({
+//   start: {
+//     x: "",
+//     y: ""
+//   },
+//   finish: {
+//     x: "",
+//     y: ""
+//   }
+// });
+
 Template.chartEditPreview.events({
   "blur .editable-chart_title": function(event) {
     var input = event.target.innerText;
@@ -25,6 +36,46 @@ Template.chartEditPreview.events({
       var text = removeNbsp(currText).trim();
       updateAndSave("updateSource", this, text);
     }
+  },
+  "drag .desktop-preview": function(event) {
+
+    // d3.select(".drag-container").remove();
+
+    var cont = d3.select(".desktop-preview")
+      .append("div")
+      .attr("class", "drag-container")
+      .style({
+        "background-color": "red",
+        "width": 0,
+        "height": 0
+      });
+
+    if (event.drag.type === 'dragstart') {
+
+
+    } else if (event.drag.type === 'dragend') {
+
+
+    } else if (event.drag.type === 'dragging') {
+
+      // drag.x = drag.x + event.drag.dx;
+      // drag.y = drag.y + event.drag.dx;
+
+      // console.log(drag.x);
+
+      cont.style({
+        "width": function() {
+          return d3.select(this).style("width") + event.drag.dx;
+        },
+        "height": function() {
+          return d3.select(this).style("height") + event.drag.dy;
+        }
+      });
+
+
+
+    }
+
   }
 });
 

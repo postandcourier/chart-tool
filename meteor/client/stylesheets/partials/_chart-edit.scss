@@ -459,3 +459,13 @@ select {
     width: 100%;
   }
 }
+
+.preview-container {
+  pointer-events: none;
+}
+
+.drag-container {
+  position: absolute;
+  top: 160px;
+  left: 160px;
+}
