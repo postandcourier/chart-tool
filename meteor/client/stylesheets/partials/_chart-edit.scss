@@ -461,27 +461,46 @@ select {
 }
 
 .annotations-container {
-  position: absolute;
-  background-color: rgba(lighten($primary-color, 40%), 0.4);
-  border: 1px solid $primary-color;
 }
 
 .annotations-background {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  background-color: rgba(lighten($primary-color, 40%), 0.4);
+  border: 1px solid $primary-color;
+  cursor: move;
+  z-index: 100;
+}
+
+.annotations-background {
+  // width: 100%;
+  // height: 100%;
 }
 
 .anno-handle {
   position: absolute;
   background-color: $primary-color;
   border-radius: 50%;
+  z-index: 1000;
 }
 
-.anno-container {
-  position: absolute;
-  cursor: move;
-}
-
-.anno-container_resize {
+.anno-top-left,
+.anno-bottom-right {
   cursor: nwse-resize;
 }
+
+.anno-top-middle,
+.anno-bottom-middle {
+  cursor: ns-resize;
+}
+
+.anno-top-right,
+.anno-bottom-left {
+  cursor: nesw-resize;
+}
+
+.anno-middle-left,
+.anno-middle-right {
+  cursor: ew-resize;
+}
+
+

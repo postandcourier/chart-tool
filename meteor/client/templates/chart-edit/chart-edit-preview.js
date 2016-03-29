@@ -1,6 +1,7 @@
 var Rect = new ReactiveVar({
   width: 0,
   height: 0,
+  radius: 4,
   anchor: "",
   coords: {
     x: 0,
@@ -8,9 +9,7 @@ var Rect = new ReactiveVar({
   }
 });
 
-var tempAnnotation,
-  annoGroup,
-  annoRect,
+var annotationsBg,
   topLeftHandle,
   topMiddleHandle,
   topRightHandle,
@@ -56,11 +55,12 @@ var drag = d3.behavior.drag()
     .origin(Object)
     .on("drag", topRightDragResize);
 
-function createHandle(selection, className, radius) {
+function createHandle(selection, className) {
 
   var dragFn, xVal, yVal;
 
   var rect = Rect.get(),
+      radius = rect.radius,
       width = rect.width,
       height = rect.height;
 
@@ -110,19 +110,70 @@ function createHandle(selection, className, radius) {
 
   return selection.append("div")
     .style({
-      "left": (xVal - radius) + "px",
-      "top": (yVal - radius) + "px",
-      "width": radius * 2 + "px",
-      "height": radius * 2 + "px"
+      "left": Math.round(xVal - radius) + rect.coords.x + "px",
+      "top": Math.round(yVal - radius) + rect.coords.y + "px",
+      "width": Math.round(radius * 2) + "px",
+      "height": Math.round(radius * 2) + "px"
     })
     .attr("class", className)
     .classed("anno-handle", true)
     .call(dragFn);
 }
 
+function repositionHandle(name) {
+
+  var rect = Rect.get(),
+      width = rect.width,
+      height = rect.height,
+      radius = rect.radius;
+
+  var xVal, yVal;
+
+  switch(name) {
+    case "anno-top-left":
+      xVal = 0;
+      yVal = 0;
+      break;
+    case "anno-top-middle":
+      xVal = width / 2;
+      yVal = 0;
+      break;
+    case "anno-top-right":
+      xVal = width;
+      yVal = 0;
+      break;
+    case "anno-middle-left":
+      xVal = 0;
+      yVal = height / 2;
+      break;
+    case "anno-middle-right":
+      xVal = width;
+      yVal = height / 2;
+      break;
+    case "anno-bottom-left":
+      xVal = 0;
+      yVal = height;
+      break;
+    case "anno-bottom-middle":
+      xVal = width / 2;
+      yVal = height;
+      break;
+    case "anno-bottom-right":
+      xVal = width;
+      yVal = height;
+      break;
+  }
+
+  d3.select("." + name)
+    .style({
+      "left": Math.round(xVal - radius) + rect.coords.x + "px",
+      "top": Math.round(yVal - radius) + rect.coords.y + "px",
+    });
+}
+
 function createAnnotationGroup(container) {
 
-  var radius = 3;
+  var radius = 4;
 
   var rect = Rect.get(),
       w = rect.width,
@@ -130,63 +181,211 @@ function createAnnotationGroup(container) {
       x = rect.coords.x,
       y = rect.coords.y;
 
-  annoGroup = d3.select(container);
+  annotationsBg.call(drag);
 
-  annoRect = annoGroup.append("div")
-    .attr("class", "annotations-background")
-    .call(drag);
+  var annotationsContainer = d3.select(annotationsBg.node().parentNode);
 
-  topLeftHandle = createHandle(annoGroup, "anno-top-left", radius);
-  topMiddleHandle = createHandle(annoGroup, "anno-top-middle", radius);
-  topRightHandle = createHandle(annoGroup, "anno-top-right", radius);
-  middleLeftHandle = createHandle(annoGroup, "anno-middle-left", radius);
-  middleRightHandle = createHandle(annoGroup, "anno-middle-right", radius);
-  bottomLeftHandle = createHandle(annoGroup, "anno-bottom-left", radius);
-  bottomMiddleHandle = createHandle(annoGroup, "anno-bottom-middle", radius);
-  bottomRightHandle = createHandle(annoGroup, "anno-bottom-right", radius);
+  topLeftHandle = createHandle(annotationsContainer, "anno-top-left", radius);
+  topMiddleHandle = createHandle(annotationsContainer, "anno-top-middle", radius);
+  topRightHandle = createHandle(annotationsContainer, "anno-top-right", radius);
+  middleLeftHandle = createHandle(annotationsContainer, "anno-middle-left", radius);
+  middleRightHandle = createHandle(annotationsContainer, "anno-middle-right", radius);
+  bottomLeftHandle = createHandle(annotationsContainer, "anno-bottom-left", radius);
+  bottomMiddleHandle = createHandle(annotationsContainer, "anno-bottom-middle", radius);
+  bottomRightHandle = createHandle(annotationsContainer, "anno-bottom-right", radius);
+
+  return annotationsBg;
 
 }
 
-function dragMove(d) {
+function dragMove() {
 
-  // annoRect.attr({
-  //   "x": d.x = Math.max(0, Math.min(w - width, d3.event.x)),
-  //   "y": d.y = Math.max(0, Math.min(h - height, d3.event.y))
-  // });
+  var rect = Rect.get(),
+      w = rect.width,
+      h = rect.height,
+      x = rect.coords.x,
+      y = rect.coords.y;
 
-  // dragPointCenterLeft
-  // dragPointCenterRight
-  // dragPointTopCenter
-  // dragPointBottomCenter
+  annotationsBg.style({
+    "top": y + d3.event.dy + "px",
+    "left": x + d3.event.dx + "px"
+  });
 
+  rect.coords.x = x + d3.event.dx;
+  rect.coords.y = y + d3.event.dy;
 
-  //     dragbarleft
-  //         .attr("x", function(d) { return d.x - (dragbarw/2); })
-  //     dragbarright
-  //         .attr("x", function(d) { return d.x + width - (dragbarw/2); })
-  //     dragbartop
-  //         .attr("x", function(d) { return d.x + (dragbarw/2); })
-  //     dragbarbottom
-  //         .attr("x", function(d) { return d.x + (dragbarw/2); }
+  Rect.set(rect);
 
-  //     dragbarleft
-  //         .attr("y", function(d) { return d.y + (dragbarw/2); });
-  //     dragbarright
-  //         .attr("y", function(d) { return d.y + (dragbarw/2); });
-  //     dragbartop
-  //         .attr("y", function(d) { return d.y - (dragbarw/2); });
-  //     dragbarbottom
-  //         .attr("y", function(d) { return d.y + height - (dragbarw/2); });
+  var handles = ["anno-top-left", "anno-top-middle", "anno-top-right", "anno-middle-left", "anno-middle-right", "anno-bottom-left", "anno-bottom-middle", "anno-bottom-right"];
+
+  handles.forEach(function(name) {
+    repositionHandle(name);
+  });
+
 }
 
-function middleRightDragResize(d) {}
-function middleLeftDragResize(d) {}
-function topMiddleDragResize(d) {}
-function bottomMiddleDragResize(d) {}
-function bottomLeftDragResize(d) {}
-function bottomRightDragResize(d) {}
-function topLeftDragResize(d) {}
-function topRightDragResize(d) {}
+function middleRightDragResize() {
+  var rect = Rect.get(),
+      w = rect.width;
+  annotationsBg.style({ "width": w + d3.event.dx + "px" });
+  rect.width = w + d3.event.dx;
+  Rect.set(rect);
+  repositionHandle("anno-top-right");
+  repositionHandle("anno-middle-right");
+  repositionHandle("anno-bottom-right");
+  repositionHandle("anno-top-middle");
+  repositionHandle("anno-bottom-middle");
+}
+
+function bottomMiddleDragResize() {
+  var rect = Rect.get(),
+      h = rect.height;
+  annotationsBg.style({ "height": h + d3.event.dy + "px" });
+  rect.height = h + d3.event.dy;
+  Rect.set(rect);
+  repositionHandle("anno-bottom-left");
+  repositionHandle("anno-bottom-middle");
+  repositionHandle("anno-bottom-right");
+  repositionHandle("anno-middle-left");
+  repositionHandle("anno-middle-right");
+}
+
+function middleLeftDragResize() {
+  var rect = Rect.get(),
+      w = rect.width,
+      x = rect.coords.x;
+  annotationsBg.style({
+    "width": w - d3.event.dx + "px",
+    "left": x + d3.event.dx + "px"
+  });
+  rect.width = w - d3.event.dx;
+  rect.coords.x = x + d3.event.dx;
+  Rect.set(rect);
+  repositionHandle("anno-top-left");
+  repositionHandle("anno-middle-left");
+  repositionHandle("anno-bottom-left");
+  repositionHandle("anno-top-middle");
+  repositionHandle("anno-bottom-middle");
+}
+
+function topMiddleDragResize() {
+  var rect = Rect.get(),
+      y = rect.coords.y,
+      h = rect.height;
+  annotationsBg.style({
+    "height": h - d3.event.dy + "px",
+    "top": y + d3.event.dy + "px"
+  });
+  rect.height = h - d3.event.dy;
+  rect.coords.y = y + d3.event.dy;
+  Rect.set(rect);
+  repositionHandle("anno-top-left");
+  repositionHandle("anno-top-middle");
+  repositionHandle("anno-top-right");
+  repositionHandle("anno-middle-left");
+  repositionHandle("anno-middle-right");
+}
+
+function bottomLeftDragResize() {
+  var rect = Rect.get(),
+      x = rect.coords.x,
+      w = rect.width,
+      h = rect.height;
+  annotationsBg.style({
+    "width": w - d3.event.dx + "px",
+    "height": h + d3.event.dy + "px",
+    "left": x + d3.event.dx + "px"
+  });
+  rect.width = w - d3.event.dx;
+  rect.height = h + d3.event.dy;
+  rect.coords.x = x + d3.event.dx;
+  Rect.set(rect);
+  repositionHandle("anno-top-left");
+  repositionHandle("anno-top-middle");
+  repositionHandle("anno-middle-left");
+  repositionHandle("anno-middle-right");
+  repositionHandle("anno-bottom-left");
+  repositionHandle("anno-bottom-middle");
+  repositionHandle("anno-bottom-right");
+}
+
+function bottomRightDragResize() {
+  var rect = Rect.get(),
+      w = rect.width,
+      h = rect.height;
+  annotationsBg.style({
+    "width": w + d3.event.dx + "px",
+    "height": h + d3.event.dy + "px",
+  });
+  rect.width = w + d3.event.dx;
+  rect.height = h + d3.event.dy;
+  Rect.set(rect);
+  repositionHandle("anno-top-right");
+  repositionHandle("anno-top-middle");
+  repositionHandle("anno-middle-left");
+  repositionHandle("anno-middle-right");
+  repositionHandle("anno-bottom-left");
+  repositionHandle("anno-bottom-middle");
+  repositionHandle("anno-bottom-right");
+}
+
+function topLeftDragResize() {
+  var rect = Rect.get(),
+      x = rect.coords.x,
+      y = rect.coords.y,
+      w = rect.width,
+      h = rect.height;
+  annotationsBg.style({
+    "width": w - d3.event.dx + "px",
+    "height": h - d3.event.dy + "px",
+    "top": y + d3.event.dy + "px",
+    "left": x + d3.event.dx + "px"
+  });
+  rect.width = w - d3.event.dx;
+  rect.height = h - d3.event.dy;
+  rect.coords.x = x + d3.event.dx;
+  rect.coords.y = y + d3.event.dy;
+  Rect.set(rect);
+  repositionHandle("anno-top-left");
+  repositionHandle("anno-top-middle");
+  repositionHandle("anno-top-right");
+  repositionHandle("anno-middle-left");
+  repositionHandle("anno-middle-right");
+  repositionHandle("anno-bottom-left");
+  repositionHandle("anno-bottom-middle");
+}
+
+function topRightDragResize() {
+  var rect = Rect.get(),
+      y = rect.coords.y,
+      w = rect.width,
+      h = rect.height;
+  annotationsBg.style({
+    "width": w + d3.event.dx + "px",
+    "height": h - d3.event.dy + "px",
+    "top": y + d3.event.dy + "px",
+  });
+  rect.width = w + d3.event.dx;
+  rect.height = h - d3.event.dy;
+  rect.coords.y = y + d3.event.dy;
+  Rect.set(rect);
+  repositionHandle("anno-top-left");
+  repositionHandle("anno-top-middle");
+  repositionHandle("anno-top-right");
+  repositionHandle("anno-middle-left");
+  repositionHandle("anno-middle-right");
+  repositionHandle("anno-bottom-middle");
+  repositionHandle("anno-bottom-right");
+}
+
+// TODO:
+// - being able to add/delete individual annotation units, hover over for remove prompt?
+//   perhaps it's treated in a list instead?
+// - field for adding text to annotation
+// - setting box anchors and recalculating positions with those anchors
+// - checks to ensure that you can't make the width or height less than something like 10px
+// - text alignment?
+// - options for adding other types of annotations (arrows, ranges, etc.)
 
 Template.chartEditPreview.events({
   "blur .editable-chart_title": function(event) {
@@ -218,10 +417,6 @@ Template.chartEditPreview.events({
   },
   "drag .preview-container > svg": function(event) {
 
-    // determine x and y coords from svg 0,0
-    // determine width and height
-    // call createAnnotationGroup(svg)
-
     if (event.drag.type === "dragstart") {
 
       d3.select(".annotations-container").remove();
@@ -230,18 +425,28 @@ Template.chartEditPreview.events({
 
       var svgClientRect = event.currentTarget.getBoundingClientRect();
 
+      var header = d3.select("." + prefix + "chart_title");
+
+      if (header.text() === "") {
+        var headerHeight = 0;
+      } else {
+        var headerHeight = header.node().getBoundingClientRect().height;
+      }
+
       rect.coords = {
         x: event.clientX - svgClientRect.left,
-        y: event.clientY - svgClientRect.top
+        y: event.clientY - svgClientRect.top + headerHeight
       };
 
       rect.width = 0;
       rect.height = 0;
 
-      // create temporary element
-      tempAnnotation = d3.select(event.currentTarget.parentNode)
+      // create element
+      annotationsBg = d3.select(event.currentTarget.parentNode)
         .append("div")
         .attr("class", "annotations-container")
+        .append("div")
+        .attr("class", "annotations-background")
         .style({
           "top": rect.coords.y + "px",
           "left": rect.coords.x + "px",
@@ -253,41 +458,24 @@ Template.chartEditPreview.events({
 
     }
 
-    if (event.drag.type === 'dragging') {
+    if (event.drag.type === 'dragging' || event.drag.type === 'dragend') {
       // update width and height
-      // update temporary element
+      // update element
       var rect = Rect.get();
 
       rect.width += event.drag.dx;
       rect.height += event.drag.dy;
 
-      tempAnnotation.style({
-        "width": rect.width + "px",
-        "height": rect.height + "px"
-      });
-
-      Rect.set(rect);
-    }
-
-    if (event.drag.type === 'dragend') {
-      // update width and height one final time
-      var rect = Rect.get();
-
-      rect.width += event.drag.dx;
-      rect.height += event.drag.dy;
-
-      tempAnnotation.style({
+      annotationsBg.style({
         "width": rect.width + "px",
         "height": rect.height + "px"
       });
 
       Rect.set(rect);
 
-      createAnnotationGroup(".annotations-container");
-
-      // need to remember to take header height into account, too
-      // and whether it's empty or not, since that'll affect the
-      // final computed height of the annotation…
+      if (event.drag.type === 'dragend') {
+        createAnnotationGroup();
+      }
 
     }
 
