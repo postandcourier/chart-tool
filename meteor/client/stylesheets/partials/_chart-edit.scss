@@ -460,12 +460,28 @@ select {
   }
 }
 
-.preview-container {
-  pointer-events: none;
+.annotations-container {
+  position: absolute;
+  background-color: rgba(lighten($primary-color, 40%), 0.4);
+  border: 1px solid $primary-color;
 }
 
-.drag-container {
+.annotations-background {
+  width: 100%;
+  height: 100%;
+}
+
+.anno-handle {
   position: absolute;
-  top: 160px;
-  left: 160px;
+  background-color: $primary-color;
+  border-radius: 50%;
+}
+
+.anno-container {
+  position: absolute;
+  cursor: move;
+}
+
+.anno-container_resize {
+  cursor: nwse-resize;
 }

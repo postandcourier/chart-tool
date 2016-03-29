@@ -1,4 +1,4 @@
-// export and overlays
+// overlays and export
 
 .overlay-outer {
   position: fixed;
@@ -57,7 +57,7 @@
   }
 }
 
-.overlay-web, .overlay-print {
+.overlay-web, .overlay-print, .overlay-annotations {
   @include row();
 }
 
@@ -91,22 +91,6 @@
     border: 1px solid $primary-color;
   }
 }
-
-// .web-export-picker {
-//   @include clearfix;
-//   .select-wrapper {
-//     width: 49%;
-//     margin-bottom: 1em;
-//     &:last-of-type {
-//       float: right;
-//     }
-//   }
-//   select {
-//     width: 100%;
-//     padding: 0.4em 0.8em;
-//     line-height: 1.2;
-//   }
-// }
 
 .web-export-submit {
   width: 100%;

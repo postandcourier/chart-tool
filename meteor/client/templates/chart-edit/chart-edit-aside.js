@@ -529,5 +529,9 @@ Template.chartEditAside.events({
       type: "info",
       confirmButtonColor: "#fff"
     });
-  }
+  },
+  'click .annotate-edit > h4': function(e) {
+    Overlay.show("chartOverlayAnnotations", this);
+    window.scrollTo(0, 0);
+  },
 });
