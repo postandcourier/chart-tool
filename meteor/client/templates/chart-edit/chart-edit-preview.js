@@ -1,13 +1,15 @@
 var Rect = new ReactiveVar({
   width: 0,
   height: 0,
-  radius: 4,
+  radius: 3,
   anchor: "",
   coords: {
     x: 0,
     y: 0
   }
 });
+
+var minSize = (Rect.get().radius * 3) + (Rect.get().radius * 2);
 
 var annotationsBg,
   topLeftHandle,
@@ -227,8 +229,8 @@ function dragMove() {
 function middleRightDragResize() {
   var rect = Rect.get(),
       w = rect.width;
-  annotationsBg.style({ "width": w + d3.event.dx + "px" });
-  rect.width = w + d3.event.dx;
+  annotationsBg.style({ "width": Math.max(minSize, w + d3.event.dx) + "px" });
+  rect.width = Math.max(minSize, w + d3.event.dx);
   Rect.set(rect);
   repositionHandle("anno-top-right");
   repositionHandle("anno-middle-right");
@@ -240,8 +242,8 @@ function middleRightDragResize() {
 function bottomMiddleDragResize() {
   var rect = Rect.get(),
       h = rect.height;
-  annotationsBg.style({ "height": h + d3.event.dy + "px" });
-  rect.height = h + d3.event.dy;
+  annotationsBg.style({ "height": Math.max(minSize, h + d3.event.dy) + "px" });
+  rect.height = Math.max(minSize, h + d3.event.dy);
   Rect.set(rect);
   repositionHandle("anno-bottom-left");
   repositionHandle("anno-bottom-middle");
@@ -254,12 +256,13 @@ function middleLeftDragResize() {
   var rect = Rect.get(),
       w = rect.width,
       x = rect.coords.x;
+  var newLeft = (w > minSize) ? x + d3.event.dx : x;
   annotationsBg.style({
-    "width": w - d3.event.dx + "px",
-    "left": x + d3.event.dx + "px"
+    "width": Math.max(minSize, w - d3.event.dx) + "px",
+    "left": newLeft + "px"
   });
-  rect.width = w - d3.event.dx;
-  rect.coords.x = x + d3.event.dx;
+  rect.width = Math.max(minSize, w - d3.event.dx);
+  rect.coords.x = newLeft;
   Rect.set(rect);
   repositionHandle("anno-top-left");
   repositionHandle("anno-middle-left");
@@ -272,12 +275,13 @@ function topMiddleDragResize() {
   var rect = Rect.get(),
       y = rect.coords.y,
       h = rect.height;
+  var newTop = (h > minSize) ? y + d3.event.dy : y;
   annotationsBg.style({
-    "height": h - d3.event.dy + "px",
-    "top": y + d3.event.dy + "px"
+    "height": Math.max(minSize, h - d3.event.dy) + "px",
+    "top": newTop + "px"
   });
-  rect.height = h - d3.event.dy;
-  rect.coords.y = y + d3.event.dy;
+  rect.height = Math.max(minSize, h - d3.event.dy);
+  rect.coords.y = newTop;
   Rect.set(rect);
   repositionHandle("anno-top-left");
   repositionHandle("anno-top-middle");
@@ -291,14 +295,15 @@ function bottomLeftDragResize() {
       x = rect.coords.x,
       w = rect.width,
       h = rect.height;
+  var newLeft = (w > minSize) ? x + d3.event.dx : x;
   annotationsBg.style({
-    "width": w - d3.event.dx + "px",
-    "height": h + d3.event.dy + "px",
-    "left": x + d3.event.dx + "px"
+    "width": Math.max(minSize, w - d3.event.dx) + "px",
+    "height": Math.max(minSize, h + d3.event.dy) + "px",
+    "left": newLeft + "px"
   });
-  rect.width = w - d3.event.dx;
-  rect.height = h + d3.event.dy;
-  rect.coords.x = x + d3.event.dx;
+  rect.width = Math.max(minSize, w - d3.event.dx);
+  rect.height = Math.max(minSize, h + d3.event.dy);
+  rect.coords.x = newLeft;
   Rect.set(rect);
   repositionHandle("anno-top-left");
   repositionHandle("anno-top-middle");
@@ -314,11 +319,11 @@ function bottomRightDragResize() {
       w = rect.width,
       h = rect.height;
   annotationsBg.style({
-    "width": w + d3.event.dx + "px",
-    "height": h + d3.event.dy + "px",
+    "width": Math.max(minSize, w + d3.event.dx) + "px",
+    "height":Math.max(minSize, h + d3.event.dy) + "px",
   });
-  rect.width = w + d3.event.dx;
-  rect.height = h + d3.event.dy;
+  rect.width = Math.max(minSize, w + d3.event.dx);
+  rect.height = Math.max(minSize, h + d3.event.dy);
   Rect.set(rect);
   repositionHandle("anno-top-right");
   repositionHandle("anno-top-middle");
@@ -336,13 +341,13 @@ function topLeftDragResize() {
       w = rect.width,
       h = rect.height;
   annotationsBg.style({
-    "width": w - d3.event.dx + "px",
-    "height": h - d3.event.dy + "px",
+    "width": Math.max(minSize, w - d3.event.dx) + "px",
+    "height": Math.max(minSize, h - d3.event.dy) + "px",
     "top": y + d3.event.dy + "px",
     "left": x + d3.event.dx + "px"
   });
-  rect.width = w - d3.event.dx;
-  rect.height = h - d3.event.dy;
+  rect.width = Math.max(minSize, w - d3.event.dx);
+  rect.height = Math.max(minSize, h - d3.event.dy);
   rect.coords.x = x + d3.event.dx;
   rect.coords.y = y + d3.event.dy;
   Rect.set(rect);
@@ -361,12 +366,12 @@ function topRightDragResize() {
       w = rect.width,
       h = rect.height;
   annotationsBg.style({
-    "width": w + d3.event.dx + "px",
-    "height": h - d3.event.dy + "px",
+    "width": Math.max(minSize, w + d3.event.dx) + "px",
+    "height": Math.max(minSize, h - d3.event.dy) + "px",
     "top": y + d3.event.dy + "px",
   });
-  rect.width = w + d3.event.dx;
-  rect.height = h - d3.event.dy;
+  rect.width = Math.max(minSize, w + d3.event.dx);
+  rect.height = Math.max(minSize, h - d3.event.dy);
   rect.coords.y = y + d3.event.dy;
   Rect.set(rect);
   repositionHandle("anno-top-left");
@@ -379,7 +384,7 @@ function topRightDragResize() {
 }
 
 // TODO:
-// - being able to add/delete individual annotation units, hover over for remove prompt?
+// - be able to add/delete individual annotation units, hover over for remove prompt?
 //   perhaps it's treated in a list instead?
 // - field for adding text to annotation
 // - setting box anchors and recalculating positions with those anchors
