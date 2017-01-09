@@ -37,12 +37,5 @@ Template.chartEditPreview.rendered = function() {
       return;
     }
 
-    var data = Router.current() && Router.current().data();
-
-    if (data) {
-      data.editable = true;
-      drawPreviews(data);
-    }
-
   });
 }
