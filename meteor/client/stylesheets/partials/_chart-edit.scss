@@ -531,3 +531,44 @@ select {
   height: 100%;
   pointer-events: none;
 }
+
+.note {
+  font-size: 0.8em;
+  color: $color-gray-medium;
+}
+
+.preview-outer-container-annotation {
+  rect {
+    &:hover {
+      cursor: url('/images/cursor.cur'), auto;
+    }
+  }
+}
+
+.annotation-mode {
+  @include appearance(none);
+  background: none;
+  border: 1px solid $color-black;
+  font-size: 0.9em;
+  padding: 0.4em 0.5em 0.45em 0.5em;
+  border-radius: 4px;
+  margin-top: 0.4em;
+  @include transition (all 0.1s ease-out);
+  &:hover {
+    background-color: $color-black;
+    color: $color-white;
+    @include transition (all 0.1s ease-in);
+  }
+}
+
+.anno-highlight-edit {
+  .anno-highlight-edit_colors {
+    li {
+      height: 1.4em;
+      width: 1.4em;
+      cursor: pointer;
+      margin-bottom: 0.2em;
+      display: inline-block;
+    }
+  }
+}

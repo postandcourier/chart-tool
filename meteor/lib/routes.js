@@ -63,6 +63,7 @@ Router.route('/chart/edit/:_id', {
     'chartEditAside': { to: 'aside' },
     'chartEditEmbed': { to: 'embed' },
     'chartEditStatus': { to: 'status' },
+    'chartEditAnnotations': { to: 'annotations' },
     'chartEditTags': { to: 'tags' },
     'overlay': { to: 'overlay' }
   },
@@ -90,6 +91,8 @@ Router.route('/chart/edit/:_id', {
     Session.set("chartTags", matchedTags);
     Session.set("chartId", this.params._id);
     Session.set('overlay-visible', false);
+    Session.set('annotationMode', false);
+    Session.set('annotationData', { type: null, highlight: [], text: [], range: [] });
     Meteor.call("getAnimalName", function(err, result) {
       if (!err) {
         Session.set("animalName", result.data.name);

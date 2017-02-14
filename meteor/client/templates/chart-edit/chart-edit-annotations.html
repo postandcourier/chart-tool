@@ -1,0 +1,52 @@
+<template name="chartEditAnnotations">
+
+  <div class="edit-box edit-annotations">
+    <h3>Annotations</h3>
+    <div class="edit-box_toggle" data-state="hidden">
+
+      <p class="note">Note: While the Annotation tab is open, previewed chart tips will be disabled.</p>
+
+      {{ #if displayHighlight }}
+        <div class="unit-edit anno-highlight-edit">
+          <h4>Highlighting <a href="#" class="help-toggle help-anno-higlight">?</a></h4>
+          <p>Select a color below, or type in a hex value:</p>
+          <ul class="anno-highlight-edit_colors">
+            {{ #each highlightColors }}
+              <li class='highlight-color' data-color="{{ this }}" style='background-color: {{ this }}'>&nbsp;</li>
+            {{ /each }}
+          </ul>
+          <div>
+            Custom hex color: <input type="text" name="" value=""><button>Copy</button>
+          </div>
+          <div>
+            <p>Currently highlighted</p>
+            <ul>
+              {{ #each currentHiglights }}
+                <li><span style="background-color: {{ color }}"></span>{{ key }}</li>
+              {{ /each }}
+            </ul>
+          </div>
+        </div>
+      {{ /if }}
+
+      <!-- Clear all annotations button -->
+
+<!-- – highlighting one or more lines, bars, columns, or column/bar series (in cases where there are 2 series)       -->
+
+      <!-- <div class="unit-edit anno-text-edit">
+        <h4>Text <a href="#" class="help-toggle help-anno-text">?</a></h4>
+        Add point|area text
+        Current text elements
+        Alignment
+      </div> -->
+
+      <!-- <div class="unit-edit anno-rage-edit">
+        <h4>Range <a href="#" class="help-toggle help-range-text">?</a></h4>
+        Add line|range
+        Current range elements
+      </div> -->
+
+    </div>
+  </div>
+
+</template>

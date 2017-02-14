@@ -453,10 +453,24 @@ Meteor.methods({
   updatePrintLines: function (chartId, lines) {
     return Charts.update(chartId, {
       $set: {
+
         "print.lines": lines,
         lastEdited: new Date()
       }
     });
+  },
+
+  // Annotation methods
+  updateAnnotations: function (chartId, data) {
+    // if (data.)
+    // debugger;
+    // return Charts.update(chartId, {
+    //   $set: {
+    //     "options.annotation":
+    //     "print.columns": cols,
+    //     lastEdited: new Date()
+    //   }
+    // });
   },
 
   // Stats methods

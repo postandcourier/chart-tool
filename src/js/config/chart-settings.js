@@ -48,6 +48,8 @@ const chartSettings = {
   xAxis: settings.xAxis,
   yAxis: settings.yAxis,
 
+  annotations: {},
+
   exportable: false, // this can be overwritten by the backend as needed
   editable: false,
   debounce: settings.debounce,

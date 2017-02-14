@@ -4251,6 +4251,8 @@ var chartSettings = {
   xAxis: xAxis,
   yAxis: yAxis,
 
+  annotations: {},
+
   exportable: false, // this can be overwritten by the backend as needed
   editable: false,
   debounce: debounce,
@@ -6161,6 +6163,8 @@ function recipe(obj) {
 
   t.dateFormat = inputDate(t.xAxis.scale, t.dateFormat, chart.date_format);
   t.data = parse(chart.data, t.dateFormat, o.index, o.stacked) || t.data;
+
+  t.annotations = chart.annotations || t.annotations;
 
   if (!t.data.stackedData) { o.stacked = false; }
 
@@ -9682,6 +9686,39 @@ function qualifier(node, obj) {
 
 }
 
+function annotation(node, obj, rendered) {
+
+  var annoData = obj.annotations;
+
+  if (annoData.highlight && annoData.highlight.length) {
+    highlight(node, obj, rendered);
+  }
+
+  if (annoData.text && annoData.text.length) {
+    text(node, obj, rendered);
+  }
+
+  if (annoData.range && annoData.range.length) {
+    range$1(node, obj, rendered);
+  }
+
+}
+
+function highlight(node, obj, rendered) {
+
+  // one more check that it is a single series
+  // apply local bar or column color change here!
+  debugger;
+}
+
+function text(node, obj, rendered) {
+
+}
+
+function range$1(node, obj, rendered) {
+
+}
+
 function bisectData(data, keyVal, stacked, xKey) {
   if (stacked) {
     var arr = [];
@@ -10742,6 +10779,10 @@ var ChartManager = function ChartManager(container, obj) {
 
   if (this.recipe.options.qualifier) {
     rendered.qualifier = qualifier(node, this.recipe);
+  }
+
+  if (this.recipe.options.annotations) {
+    rendered.annotations = annotation(node, this.recipe, rendered);
   }
 
   if (this.recipe.options.tips) {

@@ -47,7 +47,7 @@ cleanEmbed = function(data) {
     'img',
     'prefix',
     'series',
-    'annotations',
+    // 'annotations',
     'range',
     'public',
     'users',
@@ -354,4 +354,9 @@ debounce = function(func, wait, immediate) {
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
+}
+
+validateHex = function(str) {
+  var re = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
+  return re.test(str);
 }

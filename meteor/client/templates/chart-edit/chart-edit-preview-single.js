@@ -1,3 +1,13 @@
+Template.chartEditPreviewSingle.helpers({
+  annoMode: function() {
+    var annoMode = Session.get("annotationMode"),
+      annoData = Session.get("annotationData");
+    if (annoMode) {
+      return 'preview-outer-container-annotation';
+    }
+  }
+});
+
 Template.chartEditPreviewSingle.events({
   "blur .editable-chart_title": function(event) {
     event.preventDefault();
@@ -30,6 +40,33 @@ Template.chartEditPreviewSingle.events({
       text = removeNbsp(currText).trim();
     }
     updateAndSave("updateSource", this.data, text);
+  },
+  'click .ct-type_bar .ct-series_group rect, click .ct-type_column .ct-series_group rect': function(event) {
+    var annoData = Session.get('annotationData');
+
+    if (annoData.type === 'highlight') {
+
+      var current = annoData[annoData.type].filter(function(a) {
+        return a.key === '__current__';
+      })[0];
+
+      var key = event.currentTarget.parentElement.getAttribute('data-key');
+
+      var i = annoData.highlight.indexOf(current);
+
+      annoData.highlight[i] = { key: key, color: current.color };
+
+      annoData.highlight.push(current);
+
+      Session.set('annotationData', annoData);
+
+      // updateandsave???
+
+    } else if (annoData.type === 'text') {
+      // nothing yet
+    } else if (annoData.type === 'range') {
+      // nothing yet
+    }
   }
 });
 
@@ -37,18 +74,36 @@ Template.chartEditPreviewSingle.rendered = function() {
 
   this.autorun(function(comp) {
 
-    var dataContext = Template.currentData();
+    var anno;
 
-    if (!dataContext) { return; }
+    if (Session.equals('annotationMode', true)) {
+      anno = Session.get('annotationMode');
+    }
 
-    if (dataContext.data) {
+    var annoData = Session.get('annotationData');
 
-      var data = dataContext.data;
+    var dataContext = Router.current().data();
+
+    var templateData = Template.currentData();
+
+    if (!dataContext || !templateData) { return; }
+
+    if (dataContext && templateData) {
+
+      var data = dataContext;
 
       data.editable = true;
 
       Tracker.afterFlush(function() {
-        drawChart('.' + dataContext.type + '-preview-container', data);
+        if (anno) { data.options.tips = false; }
+
+        data.options.annotations = true;
+
+        data.annotations = {
+          highlight: annoData.highlight
+        };
+
+        drawChart('.' + templateData.type + '-preview-container', data);
       });
 
     }

@@ -69,6 +69,8 @@ export default function recipe(obj) {
   t.dateFormat = inputDate(t.xAxis.scale, t.dateFormat, chart.date_format);
   t.data = parse(chart.data, t.dateFormat, o.index, o.stacked) || t.data;
 
+  t.annotations = chart.annotations || t.annotations;
+
   if (!t.data.stackedData) { o.stacked = false; }
 
   t.seriesHighlight = () => {
