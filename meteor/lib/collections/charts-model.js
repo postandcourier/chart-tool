@@ -453,8 +453,59 @@ Meteor.methods({
   updatePrintLines: function (chartId, lines) {
     return Charts.update(chartId, {
       $set: {
-
         "print.lines": lines,
+        lastEdited: new Date()
+      }
+    });
+  },
+
+  updateHighlightAnnotation: function(chartId, highlightObj) {
+    var anno = Charts.findOne(chartId).annotations;
+    if (Array.isArray(anno)) {
+      anno = { highlight: [], range: [], text: [] };
+    } else if (!anno.highlight) {
+      anno.highlight = [];
+    }
+    var filtered = anno.highlight.filter(function(h) {
+      return h.key === highlightObj.key;
+    });
+    // if highlight already exists for that key, update that field
+    if (filtered.length) {
+      var newArr = anno.highlight.map(function(h) {
+        if (h.key === highlightObj.key) {
+          return highlightObj;
+        } else {
+          return h;
+        }
+      });
+      anno.highlight = newArr;
+    } else {
+      // otherwise, push new highlight to options
+      anno.highlight.push(highlightObj);
+    }
+    return Charts.update(chartId, {
+      $set: {
+        annotations: anno,
+        lastEdited: new Date()
+      }
+    });
+  },
+  removeHighlightAnnotation: function(chartId, key) {
+    var anno = Charts.findOne(chartId).annotations,
+      filtered = anno.highlight.filter(function(h) {
+        return h.key === key;
+      });
+    if (filtered.length) {
+      var newArr = anno.highlight.map(function(h) {
+        if (h.key !== highlightObj.key) {
+          return h;
+        }
+      });
+      anno.highlight = newArr;
+    }
+    return Charts.update(chartId, {
+      $set: {
+        annotations: anno,
         lastEdited: new Date()
       }
     });

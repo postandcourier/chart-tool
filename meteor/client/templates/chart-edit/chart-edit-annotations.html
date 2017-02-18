@@ -18,14 +18,16 @@
           <div>
             Custom hex color: <input type="text" name="" value=""><button>Copy</button>
           </div>
-          <div>
-            <p>Currently highlighted</p>
-            <ul>
-              {{ #each currentHiglights }}
-                <li><span style="background-color: {{ color }}"></span>{{ key }}</li>
-              {{ /each }}
-            </ul>
-          </div>
+          {{ #if currentHighlights }}
+            <div>
+              <p>Currently highlighted</p>
+              <ul>
+                {{ #each currentHiglights }}
+                  <li><span style="background-color: {{ color }}"></span>{{ key }}</li>
+                {{ /each }}
+              </ul>
+            </div>
+          {{ /if }}
         </div>
       {{ /if }}
 

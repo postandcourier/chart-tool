@@ -7337,17 +7337,19 @@ function header(container, obj) {
   var qualifier;
 
   if (obj.options.type === 'bar') {
-    qualifier = headerGroup
-      .append('div')
-      .attrs({
-        'class': function () {
-          var str = (obj.prefix) + "chart_qualifier " + (obj.prefix) + "chart_qualifier-bar";
-          if (obj.editable) { str += ' editable-chart_qualifier'; }
-          return str;
-        },
-        'contentEditable': function () { return obj.editable ? true : false; }
-      })
-      .text(obj.qualifier);
+    if (obj.qualifier !== '') {
+      qualifier = headerGroup
+        .append('div')
+        .attrs({
+          'class': function () {
+            var str = (obj.prefix) + "chart_qualifier " + (obj.prefix) + "chart_qualifier-bar";
+            if (obj.editable) { str += ' editable-chart_qualifier'; }
+            return str;
+          },
+          'contentEditable': function () { return obj.editable ? true : false; }
+        })
+        .text(obj.qualifier);
+    }
   }
 
   var legend;
@@ -9705,10 +9707,22 @@ function annotation(node, obj, rendered) {
 }
 
 function highlight(node, obj, rendered) {
+  var ref;
+  if (obj.options.type === 'bar') {
+    ref = rendered.plot.barItems[0];
+  } else if (obj.options.type === 'column') {
+    ref = rendered.plot.columnItems[0];
+  }
+  if (ref && obj.data.seriesAmount === 1) {
+    var h = obj.annotations.highlight;
+    var loop = function ( i ) {
+      ref.filter(function (d) { return d.key === h[i].key; })
+        .select('rect')
+        .style('fill', h[i].color);
+    };
 
-  // one more check that it is a single series
-  // apply local bar or column color change here!
-  debugger;
+    for (var i = 0; i < h.length; i++) loop( i );
+  }
 }
 
 function text(node, obj, rendered) {

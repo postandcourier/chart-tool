@@ -92,7 +92,14 @@ Router.route('/chart/edit/:_id', {
     Session.set("chartId", this.params._id);
     Session.set('overlay-visible', false);
     Session.set('annotationMode', false);
-    Session.set('annotationData', { type: null, highlight: [], text: [], range: [] });
+    Session.set('currentAnnotation', {});
+    // if (this.data()) {
+    //   if (!Object.keys(this.data().annotations).length) {
+        Session.set('annotationData', { type: null, highlight: [], text: [], range: [] });
+    //   } else {
+    //     Session.set('annotationData', this.data().annotations);
+    //   }
+    // }
     Meteor.call("getAnimalName", function(err, result) {
       if (!err) {
         Session.set("animalName", result.data.name);

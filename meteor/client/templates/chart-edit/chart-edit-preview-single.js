@@ -42,30 +42,13 @@ Template.chartEditPreviewSingle.events({
     updateAndSave("updateSource", this.data, text);
   },
   'click .ct-type_bar .ct-series_group rect, click .ct-type_column .ct-series_group rect': function(event) {
-    var annoData = Session.get('annotationData');
-
-    if (annoData.type === 'highlight') {
-
-      var current = annoData[annoData.type].filter(function(a) {
-        return a.key === '__current__';
-      })[0];
-
+    var currAnno = Session.get('currentAnnotation');
+    if (currAnno.type === 'highlight') {
       var key = event.currentTarget.parentElement.getAttribute('data-key');
-
-      var i = annoData.highlight.indexOf(current);
-
-      annoData.highlight[i] = { key: key, color: current.color };
-
-      annoData.highlight.push(current);
-
-      Session.set('annotationData', annoData);
-
-      // updateandsave???
-
-    } else if (annoData.type === 'text') {
-      // nothing yet
-    } else if (annoData.type === 'range') {
-      // nothing yet
+      updateAndSave("updateHighlightAnnotation", this.data, {
+        key: key,
+        color: currAnno.color
+      });
     }
   }
 });
@@ -79,8 +62,6 @@ Template.chartEditPreviewSingle.rendered = function() {
     if (Session.equals('annotationMode', true)) {
       anno = Session.get('annotationMode');
     }
-
-    var annoData = Session.get('annotationData');
 
     var dataContext = Router.current().data();
 
@@ -98,10 +79,6 @@ Template.chartEditPreviewSingle.rendered = function() {
         if (anno) { data.options.tips = false; }
 
         data.options.annotations = true;
-
-        data.annotations = {
-          highlight: annoData.highlight
-        };
 
         drawChart('.' + templateData.type + '-preview-container', data);
       });

@@ -27,11 +27,8 @@ Template.chartEditAnnotations.events({
     Session.set('annotationData', annoData);
   },
   'click .highlight-color': function(event) {
-    var annoData = Session.get('annotationData'),
-      color = event.currentTarget.getAttribute('data-color');
-    annoData.type = 'highlight';
-    annoData[annoData.type].push({ key: '__current__', color: color });
-    Session.set('annotationData', annoData);
+    var color = event.currentTarget.getAttribute('data-color');
+    Session.set('currentAnnotation', { type: 'highlight', color: color });
   },
   'click .edit-box.edit-annotations h3': function(event) {
     var el = d3.select(event.target).node().nextElementSibling,
