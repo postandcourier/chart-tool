@@ -497,9 +497,7 @@ Meteor.methods({
       });
     if (filtered.length) {
       var newArr = anno.highlight.map(function(h) {
-        if (h.key !== highlightObj.key) {
-          return h;
-        }
+        if (h.key !== key) { return h; }
       });
       anno.highlight = newArr;
     }
