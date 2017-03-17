@@ -15,6 +15,18 @@ export function custom(node, chartRecipe, rendered) {
   // If you can, it's good Chart Tool practice to return references to newly
   // created nodes and d3 objects so they be accessed later — by a dispatcher
   // event, for instance.
+
+  // d3.select(`.${chartRecipe.prefix}bg`)
+  //   .attr('transform', `translate(0, 0)`)
+  //   .attr('height', `${chartRecipe.dimensions.height()}`);
+
+  console.log(chartRecipe.dimensions.computedWidth(), chartRecipe.dimensions.height() );
+
+  console.log(chartRecipe.dimensions);
+
+  console.log(rendered.plot.xAxisObj.axis.tickSizeInner);
+
+
   return;
 
 }

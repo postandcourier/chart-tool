@@ -1,24 +1,28 @@
-$interface-font-light: "Helvetica Neue", Helvetica, sans-serif;
-$interface-font-regular: "Helvetica Neue", Helvetica, sans-serif;
-$interface-font-bold: "Helvetica Neue", Helvetica, sans-serif;
-$interface-font-black: "Helvetica Neue", Helvetica, sans-serif;
+$interface-font-light: 'Din 2014', "Helvetica Neue", Helvetica, sans-serif;
+$interface-font-regular: 'Din 2014', "Helvetica Neue", Helvetica, sans-serif;
+$interface-font-bold: 'Din 2014', "Helvetica Neue", Helvetica, sans-serif;
+$interface-font-black: 'Din 2014', "Helvetica Neue", Helvetica, sans-serif;
 
 @mixin interface-font-light {
   font-family: $interface-font-light;
-  font-weight: 200;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
 @mixin interface-font-regular {
   font-family: $interface-font-regular;
   font-weight: 400;
+  text-rendering: optimizeLegibility;
 }
 
 @mixin interface-font-bold {
   font-family: $interface-font-bold;
   font-weight: 600;
+  text-rendering: optimizeLegibility;
 }
 
 @mixin interface-font-black {
   font-family: $interface-font-black;
-  font-weight: 800;
+  font-weight: 700;
+  text-rendering: optimizeLegibility;
 }
