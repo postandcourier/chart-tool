@@ -1,4 +1,4 @@
-var CUSTOM = false;
+var CUSTOM = true;
 var prefix$1 = "ct-";
 var monthsAbr = ["Jan.","Feb.","Mar.","Apr.","May","June","July","Aug.","Sept.","Oct.","Nov.","Dec.","Jan."];
 var debounce = 500;

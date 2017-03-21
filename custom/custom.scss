@@ -1,5 +1,5 @@
 .ct-chart_svg {
-  background: #e8e6e6;
+  background: transparent;
 }
 
 .ct-bg {
@@ -9,7 +9,7 @@
 g.ct-x-axis text{
   font-family: "t26-carbon",  monospace;
   font-weight: 400;
-  fill: #616161;
+  fill: #656161;
   -moz-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -ms-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -o-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
@@ -20,7 +20,7 @@ g.ct-x-axis text{
 g.ct-y-axis text{
   font-family: "t26-carbon",  monospace;
   font-weight: 400;
-  fill: #616161;
+  fill: #656161;
   -moz-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -ms-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -o-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
@@ -28,26 +28,41 @@ g.ct-y-axis text{
   font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
 }
 
+.ct-type_bar {
+  g.ct-y-axis text {
+    font-family: "din-2014", sans-serif;
+  }
+
+  .ct-series_group text{
+    font-family: "t26-carbon",  monospace;
+    font-weight: 400;
+    -moz-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+    -ms-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+    -o-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+    -webkit-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+    font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  }
+}
 
 .ct-type_bar .ct-xAxis .ct-minor line, .ct-yAxis .ct-minor line {
-  stroke: #000;
+  stroke: #e0e0e5;
   shape-rendering: crispEdges;
 }
 
 
 text.ct-chart_qualifier-text-bg {
-  stroke: #e8e6e6;
-  stroke-width: 2px;
+  stroke-width: 10px;
 }
 
 text.ct-chart_qualifier-text, .ct-chart_qualifier {
   font-weight: 300;
   fill: #414141;
   color: #414141;
+  letter-spacing: 0.03rem;
 }
-
-.ct-xAxis g.tick line {
-  stroke: #ffffff;
+.ct-yAxis g.tick line, .ct-xAxis g.tick line {
+  stroke: #e0e2e6;
+  shape-rendering: crispEdges;
 }
 
 .domain {
@@ -55,7 +70,7 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
 }
 
 .ct-zero-line {
-  stroke: #666;
+  stroke: #515158;
 }
 
 .ct-chart_legend {
@@ -68,4 +83,9 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
   font-weight: 400;
   font-size: 14px;
   text-transform: uppercase;
+}
+
+.ct-chart_source-text {
+  letter-spacing: 0.03rem;
+  color: #656161
 }

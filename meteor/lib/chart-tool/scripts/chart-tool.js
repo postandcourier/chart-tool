@@ -4135,7 +4135,7 @@ function sequential(interpolator) {
   return linearish(scale);
 }
 
-var CUSTOM = false;
+var CUSTOM = true;
 var prefix$1 = "ct-";
 var monthsAbr = ["Jan.","Feb.","Mar.","Apr.","May","June","July","Aug.","Sept.","Oct.","Nov.","Dec.","Jan."];
 var debounce = 500;
@@ -10719,9 +10719,16 @@ function custom$1(node, chartRecipe, rendered) {
   console.log(chartRecipe.dimensions.computedWidth(), chartRecipe.dimensions.height() );
 
   console.log(chartRecipe.dimensions);
+  console.log(chartRecipe);
 
-  console.log(rendered.plot.xAxisObj.axis.tickSizeInner);
+  if ( rendered.plot.xAxisObj ) {
+    var xAxis = rendered.plot.xAxisObj.node;
 
+    node.selectAll('.ct-x-axis .tick line').attr('y2', chartRecipe.dimensions.yAxisHeight() * -1 );
+  }
+
+  //rendered.plot.xAxisObj.axis.tickSizeInner(-300);
+  //rendered.plot.xAxisObj.axis.tickSizeInner(0);
 
   return;
 
