@@ -20,10 +20,10 @@ export function custom(node, chartRecipe, rendered) {
   //   .attr('transform', `translate(0, 0)`)
   //   .attr('height', `${chartRecipe.dimensions.height()}`);
 
-  console.log(chartRecipe.dimensions.computedWidth(), chartRecipe.dimensions.height() );
+  //console.log(chartRecipe.dimensions.computedWidth(), chartRecipe.dimensions.height() );
 
-  console.log(chartRecipe.dimensions);
-  console.log(chartRecipe);
+  //console.log(chartRecipe.dimensions);
+  //console.log(chartRecipe);
 
   if ( rendered.plot.xAxisObj ) {
     const xAxis = rendered.plot.xAxisObj.node;

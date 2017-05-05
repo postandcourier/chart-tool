@@ -156,15 +156,15 @@ generateThumb = function(obj) {
 
     });
 
-    svgContainer.parentNode.removeChild(svgContainer);
+    //svgContainer.parentNode.removeChild(svgContainer);
     svgContainer = null;
 
-    outputCanvas.parentNode.removeChild(outputCanvas);
+    //outputCanvas.parentNode.removeChild(outputCanvas);
     outputCanvas = null;
 
   }
 
-  div.parentNode.removeChild(div);
+  //div.parentNode.removeChild(div);
   div = null;
 
 }

@@ -79,6 +79,8 @@ multiSVGtoPNG = (function multiSVGtoPNG() {
         canvasTarget = options.output,
         scale = options.scale || 1;
 
+    console.log(canvasTarget);
+
     d3.selectAll('.canvas-output').remove();
     var svgs = d3.select(outputTarget).select('div').selectAll("svg")[0];
     var canvasHeight = 0;
@@ -99,11 +101,14 @@ multiSVGtoPNG = (function multiSVGtoPNG() {
     context.scale(scale, scale);
 
     context.fillStyle = d3.select(canvasTarget).style("background-color");
+    console.log(canvasTarget, context.fillStyle);
 
     var imageCounter = 0;
 
     for (var i = 0; i < svgs.length; i++) {
       (function(arr, k) {
+
+        console.log('image counter', i);
 
         var currSvg = d3.select(arr[k]),
             currSvgHeight = currSvg.node().getBoundingClientRect().height;
@@ -116,6 +121,7 @@ multiSVGtoPNG = (function multiSVGtoPNG() {
         image.onload = function() {
 
           if (!imageCounter) {
+            console.log("!imageCounter", context, canvasWidth, canvasHeight);
             context.fillRect(0, 0, canvasWidth, canvasHeight);
             context.fill();
           }

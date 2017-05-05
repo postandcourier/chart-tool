@@ -15,9 +15,9 @@
 
   "margin": {
     "top": 10,
-    "right": 3,
+    "right": 10,
     "bottom": 0,
-    "left": 0
+    "left": 10
   },
 
   "tipOffset": {
@@ -92,14 +92,14 @@
   "barLabelOffset": 6,
 
   "bands": {
-    "padding": 0.12,
-    "offset": 0.06,
-    "outerPadding": 0.06
+    "padding": 0.14,
+    "offset": 0.07,
+    "outerPadding": 0.07
   },
 
   "source": {
-    "prefix": "CHART TOOL",
-    "suffix": " » SOURCE:"
+    "prefix": "The Post and Courier",
+    "suffix": " | SOURCE: "
   },
 
   "social": {
@@ -126,8 +126,8 @@
   },
 
   "image": {
-    "enable": false,
-    "base_path": "",
+    "enable": true,
+    "base_path": "images",
     "expiration": 30000,
     "filename": "thumbnail",
     "extension": "png",

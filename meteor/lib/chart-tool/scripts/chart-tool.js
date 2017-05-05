@@ -4144,7 +4144,7 @@ var ratioMobile = 1.15;
 var ratioDesktop = 0.65;
 var dateFormat = "%Y-%m-%d";
 var timeFormat$1 = "%H:%M";
-var margin = {"top":10,"right":3,"bottom":0,"left":0};
+var margin = {"top":10,"right":10,"bottom":0,"left":10};
 var tipOffset = {"vertical":2,"horizontal":1};
 var tipPadding = {"top":4,"right":9,"bottom":4,"left":9};
 var tipRadius = 3.5;
@@ -4152,10 +4152,10 @@ var yAxis = {"display":true,"scale":"linear","ticks":"auto","orient":"right","fo
 var xAxis = {"display":true,"scale":"time","ticks":"auto","orient":"bottom","format":"auto","prefix":"","suffix":"","min":"","max":"","rescale":false,"nice":false,"rangePoints":1,"tickTarget":6,"ticksSmall":4,"widthThreshold":420,"dy":0.7,"barOffset":9,"upper":{"tickHeight":7,"textX":6,"textY":7},"lower":{"tickHeight":12,"textX":6,"textY":2}};
 var barHeight = 25;
 var barLabelOffset = 6;
-var bands = {"padding":0.12,"offset":0.06,"outerPadding":0.06};
+var bands = {"padding":0.14,"offset":0.07,"outerPadding":0.07};
 
 var social = {"facebook":{"label":"Facebook","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg","redirect":"","appID":""},"twitter":{"label":"Twitter","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg","via":"","hashtag":""},"email":{"label":"Email","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-mail.svg"},"sms":{"label":"SMS","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-telephone.svg"}};
-var image = {"enable":false,"base_path":"","expiration":30000,"filename":"thumbnail","extension":"png","thumbnailWidth":460};
+var image = {"enable":true,"base_path":"images","expiration":30000,"filename":"thumbnail","extension":"png","thumbnailWidth":460};
 
 var version = "1.2.2";
 var buildVer = "0";
@@ -5665,6 +5665,7 @@ function sum$1(series) {
 }
 
 // defined in rollup.config.js
+var bucket = "pc-chart-tool";
 
 function debounce$1(fn, obj, timeout, root) {
   var timeoutID = -1;
@@ -5834,7 +5835,7 @@ function svgTest(root) {
 
 function getThumbnailPath(obj) {
   var imgSettings = obj.image;
-  imgSettings.bucket = undefined;
+  imgSettings.bucket = bucket;
   var id = obj.id.replace(obj.prefix, '');
 
   return ("https://s3.amazonaws.com/" + (imgSettings.bucket) + "/" + (imgSettings.base_path) + id + "/" + (imgSettings.filename) + "." + (imgSettings.extension));
@@ -10716,10 +10717,10 @@ function custom$1(node, chartRecipe, rendered) {
   //   .attr('transform', `translate(0, 0)`)
   //   .attr('height', `${chartRecipe.dimensions.height()}`);
 
-  console.log(chartRecipe.dimensions.computedWidth(), chartRecipe.dimensions.height() );
+  //console.log(chartRecipe.dimensions.computedWidth(), chartRecipe.dimensions.height() );
 
-  console.log(chartRecipe.dimensions);
-  console.log(chartRecipe);
+  //console.log(chartRecipe.dimensions);
+  //console.log(chartRecipe);
 
   if ( rendered.plot.xAxisObj ) {
     var xAxis = rendered.plot.xAxisObj.node;
