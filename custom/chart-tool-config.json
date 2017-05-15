@@ -3,7 +3,7 @@
   "CUSTOM": true,
 
   "prefix": "ct-",
-  "monthsAbr": ["Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec.", "Jan."],
+  "monthsAbr": ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec", "Jan"],
 
   "debounce": 500,
   "tipTimeout": 5000,
@@ -74,16 +74,16 @@
     "tickTarget": 6,
     "ticksSmall": 4,
     "widthThreshold": 420,
-    "dy": 0.7,
+    "dy": 0.6,
     "barOffset": 9,
     "upper": {
       "tickHeight": 7,
-      "textX": 6,
+      "textX": 0,
       "textY": 7
     },
     "lower": {
       "tickHeight": 12,
-      "textX": 6,
+      "textX": 0,
       "textY": 2
     }
   },
