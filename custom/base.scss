@@ -8,13 +8,13 @@
 $heading-font-family: "din-2014", 'Helvetica';
 $heading-font-weight: 400;
 $heading-font-style: normal;
-$heading-font-size: 28px;
-$heading-font-line-height: 32px;
+$heading-font-size: 24px;
+$heading-font-line-height: 30px;
 
 $utility-font-family: "din-2014", 'Helvetica';
 $utility-font-weight: 300;
 $utility-font-style: normal;
-$utility-font-size: 13px;
+$utility-font-size: 12px;
 $utility-font-line-height: 16px;
 
 @mixin heading-font {
@@ -33,10 +33,6 @@ $utility-font-line-height: 16px;
   -moz-font-feature-settings: "frac";
   -webkit-font-feature-settings: "frac";
   font-feature-settings: "frac";
-  font-variant-numeric: ordinal;
-  -moz-font-feature-settings: "ordn";
-  -webkit-font-feature-settings: "ordn";
-  font-feature-settings: "ordn";
 }
 
 @mixin utility-font {
