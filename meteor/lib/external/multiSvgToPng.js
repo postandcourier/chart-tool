@@ -116,7 +116,11 @@ multiSVGtoPNG = (function multiSVGtoPNG() {
         var item = currSvg.attr("version", 1.1).node().outerHTML;
         var imgsrc = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(item)));
         var image = new Image;
+        
+        image.custProps = {};
+        image.custProps.targetHeight = currentHeight;
         image.src = imgsrc;
+        currentHeight += currSvgHeight;
 
         image.onload = function() {
 
@@ -128,8 +132,8 @@ multiSVGtoPNG = (function multiSVGtoPNG() {
 
           imageCounter++;
 
-          context.drawImage(image, 0, currentHeight);
-          currentHeight += currSvgHeight;
+          context.drawImage(image, 0, this.custProps.targetHeight);
+          //currentHeight += currSvgHeight;
 
           if (arr.length === imageCounter) {
             var canvasData = canvas.toDataURL("image/png");
