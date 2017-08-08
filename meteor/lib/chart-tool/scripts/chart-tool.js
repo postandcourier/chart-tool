@@ -4252,6 +4252,21 @@ var chartSettings = {
 
 };
 
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var fontfaceobserver_standalone = createCommonjsModule(function (module) {
+(function(){function l(a,b){document.addEventListener?a.addEventListener("scroll",b,!1):a.attachEvent("scroll",b);}function m(a){document.body?a():document.addEventListener?document.addEventListener("DOMContentLoaded",function c(){document.removeEventListener("DOMContentLoaded",c);a();}):document.attachEvent("onreadystatechange",function k(){if("interactive"==document.readyState||"complete"==document.readyState)document.detachEvent("onreadystatechange",k),a();});}function r(a){this.a=document.createElement("div");this.a.setAttribute("aria-hidden","true");this.a.appendChild(document.createTextNode(a));this.b=document.createElement("span");this.c=document.createElement("span");this.h=document.createElement("span");this.f=document.createElement("span");this.g=-1;this.b.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";this.c.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";
+this.f.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";this.h.style.cssText="display:inline-block;width:200%;height:200%;font-size:16px;max-width:none;";this.b.appendChild(this.h);this.c.appendChild(this.f);this.a.appendChild(this.b);this.a.appendChild(this.c);}
+function t(a,b){a.a.style.cssText="max-width:none;min-width:20px;min-height:20px;display:inline-block;overflow:hidden;position:absolute;width:auto;margin:0;padding:0;top:-999px;left:-999px;white-space:nowrap;font-synthesis:none;font:"+b+";";}function y(a){var b=a.a.offsetWidth,c=b+100;a.f.style.width=c+"px";a.c.scrollLeft=c;a.b.scrollLeft=a.b.scrollWidth+100;return a.g!==b?(a.g=b,!0):!1}function z(a,b){function c(){var a=k;y(a)&&a.a.parentNode&&b(a.g);}var k=a;l(a.b,c);l(a.c,c);y(a);}function A(a,b){var c=b||{};this.family=a;this.style=c.style||"normal";this.weight=c.weight||"normal";this.stretch=c.stretch||"normal";}var B=null,C=null,E=null,F=null;function G(){if(null===C)if(J()&&/Apple/.test(window.navigator.vendor)){var a=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(window.navigator.userAgent);C=!!a&&603>parseInt(a[1],10);}else C=!1;return C}function J(){null===F&&(F=!!document.fonts);return F}
+function K(){if(null===E){var a=document.createElement("div");try{a.style.font="condensed 100px sans-serif";}catch(b){}E=""!==a.style.font;}return E}function L(a,b){return[a.style,a.weight,K()?a.stretch:"","100px",b].join(" ")}
+A.prototype.load=function(a,b){var c=this,k=a||"BESbswy",q=0,D=b||3E3,H=(new Date).getTime();return new Promise(function(a,b){if(J()&&!G()){var M=new Promise(function(a,b){function e(){(new Date).getTime()-H>=D?b():document.fonts.load(L(c,'"'+c.family+'"'),k).then(function(c){1<=c.length?a():setTimeout(e,25);},function(){b();});}e();}),N=new Promise(function(a,c){q=setTimeout(c,D);});Promise.race([N,M]).then(function(){clearTimeout(q);a(c);},function(){b(c);});}else m(function(){function u(){var b;if(b=-1!=
+f&&-1!=g||-1!=f&&-1!=h||-1!=g&&-1!=h)(b=f!=g&&f!=h&&g!=h)||(null===B&&(b=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent),B=!!b&&(536>parseInt(b[1],10)||536===parseInt(b[1],10)&&11>=parseInt(b[2],10))),b=B&&(f==v&&g==v&&h==v||f==w&&g==w&&h==w||f==x&&g==x&&h==x)),b=!b;b&&(d.parentNode&&d.parentNode.removeChild(d),clearTimeout(q),a(c));}function I(){if((new Date).getTime()-H>=D)d.parentNode&&d.parentNode.removeChild(d),b(c);else{var a=document.hidden;if(!0===a||void 0===a)f=e.a.offsetWidth,
+g=n.a.offsetWidth,h=p.a.offsetWidth,u();q=setTimeout(I,50);}}var e=new r(k),n=new r(k),p=new r(k),f=-1,g=-1,h=-1,v=-1,w=-1,x=-1,d=document.createElement("div");d.dir="ltr";t(e,L(c,"sans-serif"));t(n,L(c,"serif"));t(p,L(c,"monospace"));d.appendChild(e.a);d.appendChild(n.a);d.appendChild(p.a);document.body.appendChild(d);v=e.a.offsetWidth;w=n.a.offsetWidth;x=p.a.offsetWidth;I();z(e,function(a){f=a;u();});t(e,L(c,'"'+c.family+'",sans-serif'));z(n,function(a){g=a;u();});t(n,L(c,'"'+c.family+'",serif'));
+z(p,function(a){h=a;u();});t(p,L(c,'"'+c.family+'",monospace'));});})};"undefined"!==typeof module?module.exports=A:(window.FontFaceObserver=A,window.FontFaceObserver.prototype.load=A.prototype.load);}());
+});
+
 function objectConverter(columns) {
   return new Function("d", "return {" + columns.map(function(name, i) {
     return JSON.stringify(name) + ": d[" + i + "]";
@@ -5667,14 +5682,14 @@ function sum$1(series) {
 // defined in rollup.config.js
 var bucket = "pc-chart-tool";
 
-function debounce$1(fn, obj, timeout, root) {
+function debounce$1(fn, params, timeout, root) {
   var timeoutID = -1;
-  return function () {
+  return (function () {
     if (timeoutID > -1) { root.clearTimeout(timeoutID); }
     timeoutID = root.setTimeout(function () {
-      fn(obj);
+      fn(params);
     }, timeout);
-  };
+  });
 }
 
 function clearChart(cont) {
@@ -5957,7 +5972,11 @@ function parse(csv, inputDateFormat, index, stacked) {
       var o = {};
       o[headers[0]] = data[i].key;
       for (var j = 0; j < data[i].series.length; j++) {
-        o[data[i].series[j].key] = data[i].series[j].val;
+        if (!data[i].series[j].val || data[i].series[j].val === '__undefined__') {
+          o[data[i].series[j].key] = '0';
+        } else {
+          o[data[i].series[j].key] = data[i].series[j].val;
+        }
       }
       return o;
     }));
@@ -8049,40 +8068,23 @@ function setTickFormatX(selection$$1, ctx, ems, monthsAbr) {
 
 function setTickFormatY(fmt, d) {
   // checking for a format and formatting y-axis values accordingly
-
-  var currentFormat;
-
   switch (fmt) {
     case 'general':
-      currentFormat = format('')(d);
-      break;
+      return format('')(d);
     case 'si':
     case 'comma':
-      if (isFloat(parseFloat(d))) {
-        currentFormat = format(',.2f')(d);
-      } else {
-        currentFormat = format(',')(d);
-      }
-      break;
+      return isFloat(parseFloat(d)) ? format(',.2f')(d) : format(',')(d);
     case 'round1':
-      currentFormat = format(',.1f')(d);
-      break;
+      return format(',.1f')(d);
     case 'round2':
-      currentFormat = format(',.2f')(d);
-      break;
+      return format(',.2f')(d);
     case 'round3':
-      currentFormat = format(',.3f')(d);
-      break;
+      return format(',.3f')(d);
     case 'round4':
-      currentFormat = format(',.4f')(d);
-      break;
+      return format(',.4f')(d);
     default:
-      currentFormat = format(',')(d);
-      break;
+      return format(',')(d);
   }
-
-  return currentFormat;
-
 }
 
 
@@ -8488,7 +8490,9 @@ function axisCleanup(node, obj, xAxisObj, yAxisObj) {
   // resets ranges and dimensions, redraws yAxis, redraws xAxis
   // …then redraws yAxis again if tick wrapping has changed xAxis height
 
-  axisManager(node, obj, yAxisObj.axis.scale(), 'yAxis');
+  var newXAxisObj, newYAxisObj;
+
+  newYAxisObj = axisManager(node, obj, yAxisObj.axis.scale(), 'yAxis');
 
   var scaleObj = {
     rangeType: 'range',
@@ -8501,7 +8505,7 @@ function axisCleanup(node, obj, xAxisObj, yAxisObj) {
 
   var prevXAxisHeight = obj.dimensions.xAxisHeight;
 
-  var newXAxisObj = axisManager(node, obj, xAxisObj.axis.scale(), 'xAxis');
+  newXAxisObj = axisManager(node, obj, xAxisObj.axis.scale(), 'xAxis');
 
   newXAxisObj.node
     .attr('transform', ("translate(" + (obj.dimensions.computedWidth() - obj.dimensions.tickWidth()) + ", " + (obj.dimensions.computedHeight() - obj.dimensions.xAxisHeight) + ")"));
@@ -8511,8 +8515,16 @@ function axisCleanup(node, obj, xAxisObj, yAxisObj) {
   }
 
   if (prevXAxisHeight !== obj.dimensions.xAxisHeight) {
-    axisManager(node, obj, yAxisObj.axis.scale(), 'yAxis');
+    newYAxisObj = axisManager(node, obj, yAxisObj.axis.scale(), 'yAxis');
   }
+
+  // reset x-axis object values
+  xAxisObj.node = newXAxisObj.node;
+  xAxisObj.axis = newXAxisObj.axis;
+
+  // reset y-axis object values
+  yAxisObj.node = newYAxisObj.node;
+  yAxisObj.axis = newYAxisObj.axis;
 
 }
 
@@ -9067,12 +9079,12 @@ function columnChart(node, obj) {
           }
         },
         'y': function (d) {
-          if (d.series[i].val !== '__undefined__') {
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
             return yScale(Math.max(0, d.series[i].val));
           }
         },
         'height': function (d) {
-          if (d.series[i].val !== '__undefined__') {
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
             return Math.abs(yScale(d.series[i].val) - yScale(0));
           }
         },
@@ -9193,9 +9205,21 @@ function barChart(node, obj) {
 
     barItem.append('rect')
       .attrs({
-        'class': function (d) { return d.series[i].val < 0 ? 'negative' : 'positive'; },
-        'width': function (d) { return Math.abs(xScale(d.series[i].val) - xScale(0)); },
-        'x': function (d) { return xScale(Math.min(0, d.series[i].val)); },
+        'class': function (d) {
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
+            return d.series[i].val < 0 ? 'negative' : 'positive';
+          }
+        },
+        'width': function (d) {
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
+            return Math.abs(xScale(d.series[i].val) - xScale(0));
+          }
+        },
+        'x': function (d) {
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
+            return xScale(Math.min(0, d.series[i].val));
+          }
+        },
         'y': i * singleBar,
         'height': singleBar
       });
@@ -9207,11 +9231,13 @@ function barChart(node, obj) {
         'class': ((obj.prefix) + "bar-label")
       })
       .text(function (d, j) {
-        var val = setTickFormatY(obj.xAxis.format, d.series[i].val);
-        if (i === 0 && j === obj.data.data.length - 1) {
-          val = (obj.xAxis.prefix || '') + val + (obj.xAxis.suffix || '');
+        if (d.series[i].val && d.series[i].val !== '__undefined__') {
+          var val = setTickFormatY(obj.xAxis.format, d.series[i].val);
+          if (i === 0 && j === obj.data.data.length - 1) {
+            val = (obj.xAxis.prefix || '') + val + (obj.xAxis.suffix || '');
+          }
+          return val;
         }
-        return val;
       })
       .each(function() {
         if (Math.ceil(this.getComputedTextLength()) > widestText.width) {
@@ -9243,14 +9269,24 @@ function barChart(node, obj) {
   var loop$1 = function ( i ) {
     series[i].selectAll(("." + (obj.prefix) + "bar rect"))
       .attrs({
-        'width': function (d) { return Math.abs(xScale(d.series[i].val) - xScale(0)); },
-        'x': function (d) { return xScale(Math.min(0, d.series[i].val)); }
+        'width': function (d) {
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
+            return Math.abs(xScale(d.series[i].val) - xScale(0));
+          }
+        },
+        'x': function (d) {
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
+            return xScale(Math.min(0, d.series[i].val));
+          }
+        }
       });
 
     series[i].selectAll(("." + (obj.prefix) + "bar-label"))
       .attrs({
         'x': function (d) {
-          return xScale(Math.max(0, d.series[i].val)) + barLabelOffset;
+          if (d.series[i].val && d.series[i].val !== '__undefined__') {
+            return xScale(Math.max(0, d.series[i].val)) + barLabelOffset;
+          }
         },
         'y': function () { return i * singleBar + Math.ceil(singleBar / 2); }
       });
@@ -9378,9 +9414,7 @@ function stackedBarChart(node, obj) {
     .attrs({
       'class': function (d, i) { return ((obj.prefix) + "bar-label " + (obj.prefix) + "bar-label-" + i); },
       'data-legend': function (d) { return d.key; },
-      'x': function (d, i) {
-        return xScale(Math.max(0, lastStack[i][1]));
-      },
+      'x': function (d, i) { return xScale(Math.max(0, lastStack[i][1])); },
       'y': function (d) { return yScale(d.key) + Math.ceil(singleBar / 2); }
     })
     .text(function (d, i) {
@@ -9965,11 +9999,14 @@ function lineChartTips(tipNodes, innerTipEls, obj) {
       .text(function (d) {
         if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
         if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
-        if (d.val) {
+        if (d.val && d.val !== '__undefined__') {
           return obj.yAxis.prefix + setTickFormatY(obj.yAxis.format, d.val) + obj.yAxis.suffix;
         } else {
           return 'n/a';
         }
+      })
+      .classed(((obj.prefix) + "muted"), function (d) {
+        return (!d.val || d.val === '__undefined__');
       });
 
     var bandwidth = 0;
@@ -10008,7 +10045,9 @@ function lineChartTips(tipNodes, innerTipEls, obj) {
         .attrs({
           'cx': obj.rendered.plot.xScaleObj.scale(tipData.key) + obj.dimensions.labelWidth + obj.dimensions.yAxisPaddingRight + (bandwidth / 2),
           'cy': function (d) {
-            if (d.val) { return obj.rendered.plot.yScaleObj.scale(d.val); }
+            if (d.val && d.val !== '__undefined__') {
+              return obj.rendered.plot.yScaleObj.scale(d.val);
+            }
           }
         });
 
@@ -10272,11 +10311,14 @@ function columnChartTips(tipNodes, innerTipEls, obj) {
     .text(function (d) {
       if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
       if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
-      if (d.val) {
+      if (d.val && d.val !== '__undefined__') {
         return obj.yAxis.prefix + setTickFormatY(obj.yAxis.format, d.val) + obj.yAxis.suffix;
       } else {
         return 'n/a';
       }
+    })
+    .classed(((obj.prefix) + "muted"), function (d) {
+      return (!d.val || d.val === '__undefined__');
     });
 
   obj.rendered.plot.seriesGroup.selectAll('rect')
@@ -10782,10 +10824,6 @@ var ChartManager = function ChartManager(container, obj) {
 
 };
 
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
 var _global = createCommonjsModule(function (module) {
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
@@ -11248,13 +11286,23 @@ var index = (function (root) {
           clearChart(container);
         }
 
-        function createLoop() {
-          if (root.ChartTool.length) {
-            for (var i = 0; i < root.ChartTool.length; i++) {
-              charts.push(root.ChartTool[i]);
-              var container = "." + (chartSettings.baseClass) + "[data-chartid=" + (root.ChartTool[i].id) + "]";
-              createChart(container, root.ChartTool[i]);
-            }
+        function createLoop(resizeEvent) {
+          if (root.ChartTool.length || resizeEvent) {
+            var chartList = root.ChartTool.length ? root.ChartTool : charts;
+            var loop = function ( i ) {
+              var chart = chartList[i];
+              var matchedCharts = (void 0);
+              if (charts.length) {
+                matchedCharts = charts.filter(function (c) { return c.id === chart.id; });
+              }
+              if (!matchedCharts || !matchedCharts.length) {
+                charts.push(chart);
+              }
+              var container = "." + (chartSettings.baseClass) + "[data-chartid=" + (chart.id) + "]";
+              createChart(container, chart);
+            };
+
+            for (var i = 0; i < chartList.length; i++) loop( i );
           }
         }
 
@@ -11269,7 +11317,7 @@ var index = (function (root) {
               }
             }
           }
-          var debouncer = debounce$1(createLoop, charts, chartSettings.debounce, root);
+          var debouncer = debounce$1(createLoop, true, chartSettings.debounce, root);
           select(root)
             .on(("resize." + (chartSettings.prefix) + "debounce"), debouncer)
             .on(("resize." + (chartSettings.prefix) + "redraw"), dispatcher.call('redraw', this, charts));
@@ -11283,9 +11331,11 @@ var index = (function (root) {
               this.initialized = true;
             }
           },
+          // similar to the push method, except this is explicitly invoked by the user
           create: function (container, obj, cb) {
             return createChart(container, obj, cb);
           },
+          // push is basically the same as the create method, except for embed-based charts only
           push: function (obj, cb) {
             var container = "." + (chartSettings.baseClass) + "[data-chartid=" + (obj.id) + "]";
             createChart(container, obj, cb);
