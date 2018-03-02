@@ -15,9 +15,9 @@
 
   "margin": {
     "top": 10,
-    "right": 10,
+    "right": 3,
     "bottom": 0,
-    "left": 10
+    "left": 0
   },
 
   "tipOffset": {
@@ -47,14 +47,14 @@
     "rescale": false,
     "nice": true,
 
-    "paddingRight": 9,
-    "tickLowerBound": 3,
+    "paddingRight": 6,
+    "tickLowerBound": 1,
     "tickUpperBound": 8,
-    "tickGoal": 5,
+    "tickGoal": 4,
     "widthThreshold": 420,
     "dy": "",
     "textX": 0,
-    "textY": 0
+    "textY": 1
   },
 
   "xAxis": {
@@ -71,18 +71,18 @@
     "nice": false,
 
     "rangePoints": 1.0,
-    "tickTarget": 6,
+    "tickTarget": 5,
     "ticksSmall": 4,
     "widthThreshold": 420,
-    "dy": 0.6,
+    "dy": 0.8,
     "barOffset": 9,
     "upper": {
-      "tickHeight": 7,
+      "tickHeight": 0,
       "textX": 0,
-      "textY": 7
+      "textY": 6
     },
     "lower": {
-      "tickHeight": 12,
+      "tickHeight": 2,
       "textX": 0,
       "textY": 2
     }

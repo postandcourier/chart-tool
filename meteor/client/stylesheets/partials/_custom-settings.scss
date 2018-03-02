@@ -5,20 +5,20 @@
 // $margin: 0 0 20px 0;
 //
 // Fonts
-$heading-font-family: "din-2014", 'Helvetica';
+$heading-font-family: "adelle-sans", "lft-etica", "din-2014", 'Helvetica';
 $heading-font-weight: 400;
 $heading-font-style: normal;
 $heading-font-size: 24px;
 $heading-font-line-height: 30px;
 
-$utility-font-family: "din-2014", 'Helvetica';
+$utility-font-family: "adelle-sans", "lft-etica", "din-2014", 'Helvetica';
 $utility-font-weight: 300;
 $utility-font-style: normal;
 $utility-font-size: 12px;
-$utility-font-line-height: 16px;
+$utility-font-line-height: 15px;
 
 @mixin heading-font {
-  letter-spacing: 0.02rem;
+  letter-spacing: 0.01rem;
   font-family: $heading-font-family;
   font-weight: $heading-font-weight;
   font-style: $heading-font-style;
@@ -53,7 +53,7 @@ $primary-color: #1D8ACB;
 $primary-shade-1: #E04D69;
 $primary-shade-2: #7AC465;
 $primary-shade-3: #F0DD67;
-$primary-shade-4: #01B1C9;
+$primary-shade-4: #1caecc;
 $primaryShades: $primary-color, $primary-shade-1, $primary-shade-2, $primary-shade-3, $primary-shade-4;
 
 $alternate-color: #1caecc;
@@ -103,7 +103,7 @@ $palettes: $primaryShades, $alternateShades, $grayscaleShades, $oneupShades, $tw
  $color-beige: #FFF8E7;
  $color-red-bright: #F90611;
 
- $axis-stroke-color: #e0e0e0;
+ $axis-stroke-color: #e0e0e5;
  $axis-stroke-width: 1px;
  $axis-stroke-dasharray: 1, 3px;
  $line-stroke-width: 2.5px;

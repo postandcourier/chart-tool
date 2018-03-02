@@ -11,34 +11,34 @@
 }
 
 g.ct-x-axis text{
-  font-family: "t26-carbon",  monospace;
-  font-weight: 400;
-  fill: #656161;
-  -moz-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -ms-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -o-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -webkit-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  font-family: "ff-chambers-sans-web", "t26-carbon",  monospace;
+  font-weight: 300;
+  fill: #8A8F8F;
+  -moz-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  -ms-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  -o-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  -webkit-font-feature-settings:"onum" 1, "zero" 1, "kern" 1, "liga" 1;
+  font-feature-settings:"lnum" 1, "zero" 1, "kern" 1, "liga" 1;
 }
 
 g.ct-y-axis text{
-  font-family: "t26-carbon",  monospace;
-  font-weight: 400;
-  fill: #656161;
-  -moz-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -ms-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -o-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -webkit-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  font-family: "ff-chambers-sans-web", "t26-carbon",  monospace;
+  font-weight: 300;
+  fill: #8A8F8F;
+  -moz-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  -ms-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  -o-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  -webkit-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  font-feature-settings:"tnum" 1, "zero" 1, "kern" 1, "liga" 1;
 }
 
 .ct-type_bar {
   g.ct-y-axis text {
-    font-family: "din-2014", sans-serif;
+    font-family: "adelle-sans", "din-2014", sans-serif;
   }
 
   .ct-series_group text{
-    font-family: "t26-carbon",  monospace;
+    font-family: "ff-chambers-sans-web", "t26-carbon",  monospace;
     font-weight: 400;
     -moz-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
     -ms-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
@@ -48,31 +48,44 @@ g.ct-y-axis text{
   }
 }
 
+// AREA CHART STYLES
+
+.ct-type_area {
+  .ct-axis-group{
+    line{
+      opacity: 0.4;
+    }
+  }
+
+  .ct-series_group {
+    .ct-fill {
+      opacity: 0.85;
+    }
+  }
+
+}
+
 .ct-type_bar .ct-xAxis .ct-minor line, .ct-yAxis .ct-minor line {
-  stroke: #e0e0e5;
+  stroke: #e0e5e5;
   shape-rendering: crispEdges;
 }
 
-.ct-type_area {
-  .ct-series_group {
-    .ct-fill {
-      opacity: 0.7;
-    }
-  }
-}
-
 text.ct-chart_qualifier-text-bg {
-  stroke-width: 10px;
+  stroke-width: 8px;
+  font-weight: 200;
+  letter-spacing: 0.03rem;
+  font-style: italic;
 }
 
 text.ct-chart_qualifier-text, .ct-chart_qualifier {
-  font-weight: 300;
-  fill: #414141;
-  color: #414141;
+  font-weight: 200;
+  font-style: italic;
+  fill: #8A8F8F;
+  color: #8A8F8F;
   letter-spacing: 0.03rem;
 }
 .ct-yAxis g.tick line, .ct-xAxis g.tick line {
-  stroke: #e0e2e6;
+  stroke: #e0e3e5;
   shape-rendering: crispEdges;
 }
 
@@ -81,23 +94,37 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
 }
 
 .ct-zero-line {
-  stroke: #515158;
+  stroke: #717878;
 }
 
 .ct-chart_legend {
-  font-size: 12px;
-  margin-top: 0.4rem;
+  font-size: 13px;
+  margin: 0.333rem 0;
+}
+
+// LEGEND STYLES
+
+.ct-chart_legend {
+  line-height: 18px;
+}
+
+.ct-chart_legend .ct-legend_item .ct-legend_item_icon {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
 }
 
 .ct-chart_legend .ct-legend_item, .ct-tip_text {
-  font-family: "t26-carbon",  monospace;
-  font-weight: 400;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.03rem;
+  font-weight: 200;
+  font-size: 12px;
+  color: #6A6F6F;
+  letter-spacing: 0.02rem;
+  line-height: 18px;
 }
 
 .ct-chart_source-text {
-  letter-spacing: 0.03rem;
-  color: #656161
+  font-family: "adelle-sans", "lft-etica", "t26-carbon",  monospace;
+  font-size: 10px;
+  letter-spacing: 0.01rem;
+  color: #8A8F8F;
 }

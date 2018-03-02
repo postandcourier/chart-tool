@@ -20,15 +20,34 @@ export function custom(node, chartRecipe, rendered) {
   //   .attr('transform', `translate(0, 0)`)
   //   .attr('height', `${chartRecipe.dimensions.height()}`);
 
-  //console.log(chartRecipe.dimensions.computedWidth(), chartRecipe.dimensions.height() );
+  // console.log(chartRecipe);
+  // console.log(rendered);
 
-  //console.log(chartRecipe.dimensions);
-  //console.log(chartRecipe);
+  function moveToBack( nodeToMove ) {
+    // get the actual DOM node for the container selection
+    const theContainer = rendered.container.node();
+
+    theContainer.removeChild(nodeToMove);
+    theContainer.insertBefore(nodeToMove, theContainer.firstChild);
+  }
+
+  if (rendered.plot.xAxisObj) {
+    moveToBack(rendered.plot.xAxisObj.node.node());
+  }
+
+
+  if ( chartRecipe.options.type === 'area' ) {
+    console.log("custom.js | Area chart detected!");
+
+    // send the series behind the axes for an area chart
+    moveToBack( rendered.plot.seriesGroup.node() );
+  }
+
 
   if ( rendered.plot.xAxisObj ) {
     const xAxis = rendered.plot.xAxisObj.node;
 
-    node.selectAll('.ct-x-axis .tick line').attr('y2', chartRecipe.dimensions.yAxisHeight() * -1 );
+    node.selectAll('.ct-x-axis .tick line').attr('y1', chartRecipe.dimensions.yAxisHeight() * -1 );
   }
 
   //rendered.plot.xAxisObj.axis.tickSizeInner(-300);
