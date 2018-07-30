@@ -19,8 +19,8 @@ var bands = {"padding":0.14,"offset":0.07,"outerPadding":0.07};
 var source = {"prefix":"The Post and Courier","suffix":" | SOURCE: "};
 var social = {"facebook":{"label":"Facebook","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg","redirect":"","appID":""},"twitter":{"label":"Twitter","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg","via":"","hashtag":""},"email":{"label":"Email","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-mail.svg"},"sms":{"label":"SMS","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-telephone.svg"}};
 var image = {"enable":true,"base_path":"images","expiration":30000,"filename":"thumbnail","extension":"png","thumbnailWidth":460};
-var embedJS = "http://www.postandcourier.com/app/js/chart-tool/chart-tool.js";
-var embedCSS = "http://www.postandcourier.com/app/js/chart-tool/chart-tool.css";
+var embedJS = "//www.postandcourier.com/app/js/chart-tool/chart-tool.js";
+var embedCSS = "//www.postandcourier.com/app/js/chart-tool/chart-tool.css";
 var config = {
 	CUSTOM: CUSTOM,
 	prefix: prefix$1,

@@ -134,7 +134,7 @@
     "thumbnailWidth": 460
   },
 
-  "embedJS": "http://www.postandcourier.com/app/js/chart-tool/chart-tool.js",
-  "embedCSS": "http://www.postandcourier.com/app/js/chart-tool/chart-tool.css"
+  "embedJS": "//www.postandcourier.com/app/js/chart-tool/chart-tool.js",
+  "embedCSS": "//www.postandcourier.com/app/js/chart-tool/chart-tool.css"
 
 }

@@ -3,7 +3,7 @@
 }
 
 .chart-export, .chart-thumbnail, .canvas-container {
-  background-color: #f4f3f3 !important;
+  background-color: #F3F4F2 !important;
 }
 
 .ct-bg {
@@ -11,9 +11,9 @@
 }
 
 g.ct-x-axis text{
-  font-family: "ff-chambers-sans-web", "t26-carbon",  monospace;
-  font-weight: 300;
-  fill: #8A8F8F;
+  font-family: "t26-carbon","ff-chambers-sans-web", "t26-carbon",  monospace;
+  font-weight: 200;
+  fill: #535B57;
   -moz-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -ms-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -o-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
@@ -22,24 +22,25 @@ g.ct-x-axis text{
 }
 
 g.ct-y-axis text{
-  font-family: "ff-chambers-sans-web", "t26-carbon",  monospace;
-  font-weight: 300;
-  fill: #8A8F8F;
-  -moz-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -ms-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -o-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  -webkit-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
-  font-feature-settings:"tnum" 1, "zero" 1, "kern" 1, "liga" 1;
+  font-family: "t26-carbon","ff-chambers-sans-web", "t26-carbon",  monospace;
+  font-weight: 200;
+  fill: #535B57;
+  -moz-font-feature-settings:"pnum" 1, "zero" 0, "kern" 1, "liga" 1;
+  -ms-font-feature-settings:"pnum" 1, "zero" 0, "kern" 1, "liga" 1;
+  -o-font-feature-settings:"pnum" 1, "zero" 0, "kern" 1, "liga" 1;
+  -webkit-font-feature-settings:"pnum" 1, "zero" 0, "kern" 1, "liga" 1;
+  font-feature-settings:"tnum" 1, "zero" 0, "kern" 1, "liga" 1;
 }
 
 .ct-type_bar {
   g.ct-y-axis text {
-    font-family: "adelle-sans", "din-2014", sans-serif;
+    font-family: "adelle-sans", sans-serif;
+    line-height: 1.1;
   }
 
   .ct-series_group text{
-    font-family: "ff-chambers-sans-web", "t26-carbon",  monospace;
-    font-weight: 400;
+    font-family: "t26-carbon",  monospace;
+    font-weight: 300;
     -moz-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
     -ms-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
     -o-font-feature-settings:"smcp" 1, "pnum" 1, "zero" 1, "kern" 1, "liga" 1;
@@ -66,23 +67,25 @@ g.ct-y-axis text{
 }
 
 .ct-type_bar .ct-xAxis .ct-minor line, .ct-yAxis .ct-minor line {
-  stroke: #e0e5e5;
+  stroke: #EBECEB;
   shape-rendering: crispEdges;
 }
 
 text.ct-chart_qualifier-text-bg {
   stroke-width: 8px;
-  font-weight: 200;
-  letter-spacing: 0.03rem;
-  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.06rem;
+  font-style: normal;
+  font-feature-settings: "c2sc", "smcp";
 }
 
 text.ct-chart_qualifier-text, .ct-chart_qualifier {
-  font-weight: 200;
-  font-style: italic;
-  fill: #8A8F8F;
-  color: #8A8F8F;
-  letter-spacing: 0.03rem;
+  font-weight: 300;
+  font-style: normal;
+  fill: #68706C;
+  color: #68706C;
+  letter-spacing: 0.06rem;
+  font-feature-settings: "c2sc", "smcp";
 }
 .ct-yAxis g.tick line, .ct-xAxis g.tick line {
   stroke: #e0e3e5;
@@ -115,16 +118,18 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
 }
 
 .ct-chart_legend .ct-legend_item, .ct-tip_text {
-  font-weight: 200;
+  font-weight: 300;
   font-size: 12px;
-  color: #6A6F6F;
-  letter-spacing: 0.02rem;
-  line-height: 18px;
+  color: #262B28;
+  line-height: 16px;
+  letter-spacing: 0;
+  text-transform: capitalize;
 }
 
 .ct-chart_source-text {
   font-family: "adelle-sans", "lft-etica", "t26-carbon",  monospace;
-  font-size: 10px;
-  letter-spacing: 0.01rem;
-  color: #8A8F8F;
+  font-size: 12px;
+  letter-spacing: 0.06rem;
+  font-feature-settings: "c2sc", "smcp";
+  color: #919995;
 }

@@ -35,6 +35,15 @@
   @include utility-font;
 }
 
+.#{$prefix}chart:before{
+  width: 5rem;
+  content: "";
+  display: block;
+  height: 0.3rem;
+  margin-bottom: 1rem;
+  box-shadow: 5rem 0 0 #f15062 inset;
+}
+
 .#{$prefix}thumbnail {
   width: 100%;
 }
