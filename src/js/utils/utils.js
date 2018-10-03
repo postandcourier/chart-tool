@@ -1,15 +1,12 @@
-import FontFaceObserver from 'fontfaceobserver';
 import { select } from 'd3-selection';
 import { csvParseRows } from 'd3-dsv';
 import { timeYears, timeMonths, timeDays, timeHours, timeMinutes } from 'd3-time';
 import {
   curveLinear,
-  curveCardinal,
-  curveCatmullRom,
-  curveMonotoneX,
   curveNatural,
   curveStepBefore,
-  curveStepAfter
+  curveStepAfter,
+  curveStep
 } from 'd3-shape';
 import Settings from '../config/chart-settings';
 import bucket from '../config/env';
@@ -27,14 +24,16 @@ export function debounce(fn, params, timeout, root) {
 }
 
 export function clearChart(cont) {
-  let el = document.querySelector(cont);
-  while (el && el.querySelectorAll('svg').length) {
-    let svg = el.querySelectorAll('svg');
-    svg[svg.length - 1].parentNode.removeChild(svg[svg.length - 1]);
-  }
-  while (el && el.querySelectorAll('div').length) {
-    let div = el.querySelectorAll('div');
-    div[div.length - 1].parentNode.removeChild(div[div.length - 1]);
+  if (typeof document !== 'undefined') {
+    let el = isElement(cont) ? cont : document.querySelector(cont);
+    while (el && el.querySelectorAll('svg').length) {
+      let svg = el.querySelectorAll('svg');
+      svg[svg.length - 1].parentNode.removeChild(svg[svg.length - 1]);
+    }
+    while (el && el.querySelectorAll('div').length) {
+      let div = el.querySelectorAll('div');
+      div[div.length - 1].parentNode.removeChild(div[div.length - 1]);
+    }
   }
   return cont;
 }
@@ -44,19 +43,13 @@ export function clearObj(obj) {
   return obj;
 }
 
-export function clearDrawn(drawn, obj) {
-  if (drawn.length) {
-    for (let i = drawn.length - 1; i >= 0; i--) {
-      if (drawn[i].id === obj.id) {
-        drawn.splice(i, 1);
-      }
-    }
-  }
-  return drawn;
-}
-
 export function getBounding(selector, dimension) {
-  return document.querySelector(selector).getBoundingClientRect()[dimension];
+  if (isElement(selector)) {
+    return selector.getBoundingClientRect()[dimension];
+  } else {
+    return document.querySelector(selector).getBoundingClientRect()[dimension];
+  }
+
 }
 
 export class TimeObj {
@@ -72,8 +65,41 @@ export class TimeObj {
   }
 }
 
-export function wrapText(text, width) {
-  text.each(function() {
+export function wrapAnnoText(textNode) {
+  textNode.each(function() {
+
+    const text = select(this),
+      lineHeight = 1.0, // ems
+      x = text.attr('x'),
+      dy = parseFloat(text.attr('dy')) || 0;
+
+    let words = text.text().split('\n').reverse(),
+      line = [],
+      lineNumber = 0,
+      word,
+      tspan = text.text(null).append('tspan')
+        .attr('x', x)
+        .attr('dy', `${dy}em`);
+
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(' '));
+      if (line.length > 1) {
+        line.pop();
+        tspan.text(line.join(' '));
+        line = [word];
+        tspan = text.append('tspan')
+          .attr('x', x)
+          .attr('dy', `${++lineNumber > 0 ? lineHeight : 0}em`)
+          .text(word);
+      }
+    }
+  });
+}
+
+export function wrapText(textNode, width) {
+
+  textNode.each(function() {
 
     const text = select(this),
       y = text.attr('y'),
@@ -180,18 +206,16 @@ export function timeInterval(data) {
 
 export function getCurve(interp) {
   switch (interp) {
-    case 'cardinal':
-      return curveCardinal;
     case 'linear':
       return curveLinear;
+    case 'step':
+      return curveStep;
     case 'step-before':
       return curveStepBefore;
     case 'step-after':
       return curveStepAfter;
+    case 'cardinal':
     case 'monotone':
-      return curveMonotoneX;
-    case 'catmull-rom':
-      return curveCatmullRom;
     case 'natural':
       return curveNatural;
   }
@@ -253,25 +277,28 @@ export function csvToTable(target, data) {
     .text(d => d);
 }
 
-export function waitForFonts(fonts) {
-  return new Promise((resolve, reject) => {
-    if (fonts && fonts.length) {
-      Promise.all(fonts.map(f => new FontFaceObserver(f).load()))
-        .then(() => resolve())
-        .catch(() => reject());
-    } else {
-      resolve();
-    }
-  });
+export function getUniqueValues(data) {
+  return Array.from(new Set(data));
 }
 
-export function getUniqueDateValues(data, type) {
+export function resolveObjectPath(path, obj) {
+  return path.split('.').reduce((prev, curr) => {
+    return prev ? prev[curr] : undefined;
+  }, obj || self);
+}
+
+export function getUniqueDateValues(data, type, key) {
   const allDates = data.map(d => {
     switch (type) {
-      case 'day': return d.key.getDate();
-      case 'month': return d.key.getMonth();
-      case 'year': return d.key.getFullYear();
+      case 'day': return resolveObjectPath(key, d).getDate();
+      case 'month': return resolveObjectPath(key, d).getMonth();
+      case 'year': return resolveObjectPath(key, d).getFullYear();
     }
   });
-  return Array.from(new Set(allDates));
+  return getUniqueValues(allDates);
+}
+
+export function isElement(el) {
+  const isString = typeof cont === 'string';
+  return !isString && el.nodeName;
 }

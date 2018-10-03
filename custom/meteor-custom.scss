@@ -7,7 +7,7 @@
 // }
 
 @function ptToPx($pt) {
-  $magic: 1.30522;
+  $magic: 96 / 72;
   $val: ($pt * $magic) * 1px;
   @return ($val);
 }
@@ -83,15 +83,15 @@ $nine-pt: 12.0px; // actually renders at 9.22pt
 .chart-print-export {
 
   .#{$prefix}chart_title {
-    font-size: $nine-pt;
+    font-size: ptToPx(9);
     margin: 0;
     padding: 0;
     line-height: 1em;
-    margin-bottom: 2px;
+    padding-bottom: 2px;
   }
 
   .#{$prefix}chart_title-text {
-    font-size: $nine-pt;
+    font-size: ptToPx(9);
     margin: 0;
     padding: 0;
     border: none;
@@ -100,11 +100,11 @@ $nine-pt: 12.0px; // actually renders at 9.22pt
   }
 
   .#{$prefix}chart_qualifier {
-    display: inline-block;
-    padding-left: 20px;
-    padding-right: 6px;
+    display: block;
+    padding-right: 0;
+    padding-left: 0;
     height: auto;
-    font-size: $eight-pt;
+    font-size: ptToPx(8);
     line-height: 1em;
     vertical-align: middle;
     margin: 0;
@@ -112,23 +112,21 @@ $nine-pt: 12.0px; // actually renders at 9.22pt
     color: $color-black;
   }
 
-  .#{$prefix}chart_qualifier-bar {
-    display: block;
-    padding-right: 0;
-    padding-left: 0;
-  }
-
   .#{$prefix}chart_source {
-    font-size: $six-five-pt;
-    padding-top: 4px;
+    font-size: ptToPx(6.5);
+    padding-top: 0;
     display: block;
     color: $color-black;
-    padding-bottom: 0;
+    padding-bottom: 1px;
     margin-bottom: 0;
-    line-height: $six-five-pt;
+    line-height: ptToPx(6.5);
     @media(min-width: 420px) {
       width: auto;
     }
+  }
+
+  .#{$prefix}chart_source-text {
+    padding-top: 4px;
   }
 
   .#{$prefix}chart_legend {
@@ -136,13 +134,13 @@ $nine-pt: 12.0px; // actually renders at 9.22pt
     margin: 0;
     display: block;
     line-height: 11px;
-    margin-top: 2px;
+    padding-top: 2px;
   }
 
   .#{$prefix}chart_legend .#{$prefix}legend_item {
     margin: 0;
     padding-right: 8px;
-    line-height: $eight-pt;
+    line-height: ptToPx(8);
     white-space: nowrap;
   }
 
@@ -156,7 +154,7 @@ $nine-pt: 12.0px; // actually renders at 9.22pt
 
   .#{$prefix}chart_legend .#{$prefix}legend_item .#{$prefix}legend_item_text {
     color: $color-black;
-    font-size: $eight-pt;
+    font-size: ptToPx(8);
   }
 
   // axes
@@ -164,21 +162,23 @@ $nine-pt: 12.0px; // actually renders at 9.22pt
   .#{$prefix}axis-group .#{$prefix}minor line {
     stroke: $color-black;
     stroke-dasharray: 0.01, ptToPx(1.7);
-    stroke-width: $point-five-pt;
+    stroke-width: ptToPx(0.5);
     stroke-linejoin: round;
     stroke-linecap: round;
   }
 
   .#{$prefix}axis-group g.tick line {
     stroke: $color-black;
-    stroke-width: $point-five-pt;
+    stroke-width: ptToPx(0.5);
     fill: none;
+    font-size: 16px;
+    stroke-linecap: square;
   }
 
   .#{$prefix}zero-line {
     fill: none;
     stroke: $color-black;
-    stroke-width: $point-five-pt;
+    stroke-width: ptToPx(0.5);
   }
 
   .#{$prefix}y-axis g.tick text {
@@ -190,23 +190,48 @@ $nine-pt: 12.0px; // actually renders at 9.22pt
     stroke: $color-black;
   }
 
-  .#{$prefix}axis-group text, .#{$prefix}bar-label {
-    font-size: $eight-pt;
+  .#{$prefix}axis-group text,
+  .#{$prefix}bar-label,
+  .#{$prefix}annotation_text {
+    font-size: ptToPx(8);
     color: $color-black;
     fill: $color-black;
+    font-kerning: none;
+  }
+
+  .#{$prefix}annotation_text {
+    paint-order: stroke;
+    stroke: $color-white;
+    stroke-width: ptToPx(1.0);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    text-shadow: none;
   }
 
   .#{$prefix}series_group .#{$prefix}line, .#{$prefix}series_group .#{$prefix}line.#{$prefix}line-1 {
-    stroke-width: $one-pt !important;
+    stroke-width: ptToPx(1.0) !important;
   }
 
   .#{$prefix}series_group .#{$prefix}line:only-of-type {
-    stroke-width: $one-pt;
+    stroke-width: ptToPx(1.0);
   }
 
   .major-tick line {
     stroke: $color-black;
-    stroke-width: $point-five-pt;
+    stroke-width: ptToPx(0.5);
+  }
+
+  .#{$prefix}type_column .#{$prefix}series_group .#{$prefix}column rect,
+  .#{$prefix}type_bar .#{$prefix}series_group .#{$prefix}bar rect {
+    stroke-width: ptToPx(0.5);
+  }
+
+  .#{$prefix}pointer-path {
+    stroke-width: ptToPx(0.5);
+  }
+
+  .#{$prefix}annotation_range-line {
+    stroke-width: ptToPx(1.0);
   }
 
 }

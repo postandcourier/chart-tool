@@ -2,111 +2,86 @@
 //
 // $prefix: 'ct-';
 // $width: 100%;
-$margin: 3em 0 4em 0;
+// $margin: 0 0 20px 0;
 //
-// Fonts
-$heading-font-family: "adelle-sans", 'Helvetica';
-$heading-font-weight: 700;
-$heading-font-style: normal;
-$heading-font-size: 16px;
-$heading-font-line-height: 1.2;
-
-$utility-font-family: "adelle-sans", 'Helvetica';
-$utility-font-weight: 300;
-$utility-font-style: normal;
-$utility-font-size: 12px;
-$utility-font-line-height: 15px;
-
-@mixin heading-font {
-  font-family: $heading-font-family;
-  font-weight: $heading-font-weight;
-  font-style: $heading-font-style;
-  font-size: $heading-font-size;
-  line-height: $heading-font-line-height;
-  letter-spacing: 0.06rem;
-  font-variant-ligatures: common-ligatures contextual;
-  font-variant-numeric: oldstyle-nums proportional-nums;
-  -moz-font-feature-settings: "kern", "liga", "clig", "calt", "pnum", "frac", "onum";
-  -ms-font-feature-settings: "kern", "liga", "clig", "calt", "pnum", "frac", "onum";
-  -webkit-font-feature-settings: "kern", "liga", "clig", "calt", "pnum", "frac", "onum";
-  font-feature-settings: "kern", "liga", "clig", "calt", "pnum", "frac", "onum";
-  text-transform: uppercase;
-
-  text-rendering: optimizeLegibility;
-  font-kerning: normal;
-}
-
-@mixin utility-font {
-  font-family: $utility-font-family;
-  font-weight: $utility-font-weight;
-  font-style: $utility-font-style;
-  font-size: $utility-font-size;
-  line-height: $utility-font-line-height;
-  text-rendering: optimizeLegibility;
-  font-kerning: normal;
-  -moz-font-feature-settings: "kern";
-  -webkit-font-feature-settings: "kern";
-  font-feature-settings: "kern";
-}
-
+// // Fonts
+// $heading-font-family: 'Helvetica';
+// $heading-font-weight: bold;
+// $heading-font-style: normal;
+// $heading-font-size: 15px;
+// $heading-font-line-height: 17px;
+// $heading-font-letter-spacing: 0px;
+//
+// $utility-font-family: 'Helvetica';
+// $utility-font-weight: normal;
+// $utility-font-style: normal;
+// $utility-font-size: 13px;
+// $utility-font-line-height: 16px;
+// $utility-font-letter-spacing: 0px;
+//
+// @mixin heading-font {
+//   font-family: $heading-font-family;
+//   font-weight: $heading-font-weight;
+//   font-style: $heading-font-style;
+//   font-size: $heading-font-size;
+//   line-height: $heading-font-line-height;
+//   letter-spacing: $heading-font-letter-spacing;
+// }
+//
+// @mixin utility-font {
+//   font-family: $utility-font-family;
+//   font-weight: $utility-font-weight;
+//   font-style: $utility-font-style;
+//   font-size: $utility-font-size;
+//   line-height: $utility-font-line-height;
+//   letter-spacing: $utility-font-letter-spacing;
+// }
+//
 // // Color palettes
-$primary-color: #1D8ACB;
-$primary-shade-1: #E04D69;
-$primary-shade-2: #393F3C;
-$primary-shade-3: #1CAECC;
-$primary-shade-4: #F2734F;
-$primaryShades: $primary-color, $primary-shade-1, $primary-shade-2, $primary-shade-3, $primary-shade-4;
-
-$alternate-color: #1CAECC;
-$alternate-shade-1: #1d8acb;
-$alternate-shade-2: #9264ba;
-$alternate-shade-3: #f15062;
-$alternate-shade-4: #F2734F;
-$alternateShades: $alternate-color, $alternate-shade-1, $alternate-shade-2, $alternate-shade-3, $alternate-shade-4;
-
-$grayscale-color: #262B28;
-$grayscale-shade-1: #393F3C;
-$grayscale-shade-2: #59665F;
-$grayscale-shade-3: #7B8C83;
-$grayscale-shade-4: #AFBFB6;
-$grayscaleShades: $grayscale-color, $grayscale-shade-1, $grayscale-shade-2, $grayscale-shade-3, $grayscale-shade-4;
-
-$oneup-color: #E04D69;
-$oneup-shade-1: #262B28;
-$oneup-shade-2: #59665F;
-$oneup-shade-3: #96A59D;
-$oneup-shade-4: #AFBFB6;
-$oneupShades: $oneup-color, $oneup-shade-1, $oneup-shade-2, $oneup-shade-3, $oneup-shade-4;
-
-$twoup-color: #E04D69;
-$twoup-shade-1: #1D8ACB;
-$twoup-shade-2: #262B28;
-$twoup-shade-3: #7B8C83;
-$twoup-shade-4: #AFBFB6;
-$twoupShades: $twoup-color, $twoup-shade-1, $twoup-shade-2, $twoup-shade-3, $twoup-shade-4;
-
-$palette-count: 5;
-$palette-names: 'primary', 'alternate', 'grayscale', 'first-one', 'first-two';
-$palettes: $primaryShades, $alternateShades, $grayscaleShades, $oneupShades, $twoupShades;
-
- // Other colors
- $color-black: #262B28;
- $color-gray-dark: #2F3531;
- $color-gray-medium: #535B57;
- $color-gray-light: #EBECEB;
- $color-white: #F3F4F2;
-
- $color-red: #DA161F;
- $color-orange: #FF6B00;
- $color-green: #50AA30;
- $color-blue: #29639C;
- $color-yellow: #F8E71C;
- $color-beige: #FFF8E7;
- $color-red-bright: #F90611;
-
- $axis-stroke-color: #e0e0e5;
- $axis-stroke-width: 1px;
- $axis-stroke-dasharray: 1, 3px;
- $line-stroke-width: 2.5px;
-
- $series-count-max: 5;
+// $primary-color: #1f77b4;
+// $primary-shade-1: #ff7f0e;
+// $primary-shade-2: #bcbd22;
+// $primary-shade-3: #8c564b;
+// $primary-shade-4: #7f7f7f;
+// $primaryShades: $primary-color, $primary-shade-1, $primary-shade-2, $primary-shade-3, $primary-shade-4;
+//
+// $alternate-color: #6b6ecf;
+// $alternate-shade-1: #b5cf6b;
+// $alternate-shade-2: #e7ba52;
+// $alternate-shade-3: #d6616b;
+// $alternate-shade-4: #ce6dbd;
+// $alternateShades: $alternate-color, $alternate-shade-1, $alternate-shade-2, $alternate-shade-3, $alternate-shade-4;
+//
+// $grayscale-color: #000000;
+// $grayscale-shade-1: #333333;
+// $grayscale-shade-2: #555555;
+// $grayscale-shade-3: #888888;
+// $grayscale-shade-4: #aaaaaa;
+// $grayscaleShades: $grayscale-color, $grayscale-shade-1, $grayscale-shade-2, $grayscale-shade-3, $grayscale-shade-4;
+//
+// $palette-count: 3;
+// $palette-names: 'primary', 'alternate', 'grayscale';
+// $palettes: $primaryShades, $alternateShades, $grayscaleShades;
+//
+// // Other colors
+// $color-black: #111111;
+// $color-gray-dark: #595959;
+// $color-gray-medium: #777777;
+// $color-gray-light: #F9F9F9;
+// $color-white: #FFFFFF;
+//
+// $color-red: #DA161F;
+// $color-orange: #FF6B00;
+// $color-green: #50AA30;
+// $color-blue: #29639C;
+// $color-yellow: #F8E71C;
+// $color-beige: #FFF8E7;
+// $color-red-bright: #F90611;
+// $color-annotation-mode: orangered;
+//
+// $axis-stroke-color: lighten($color-gray-medium, 35%);
+// $axis-stroke-width: 1px;
+// $axis-stroke-dasharray: 1, 3px;
+// $line-stroke-width: 2.5px;
+//
+// $series-count-max: 5;

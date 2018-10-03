@@ -13,13 +13,13 @@ const libPath = './src',
   browserSyncPort = 3030,
   browserSyncUIPort = 3060,
 
-  buildPath = `./dist/${version}-${buildVer}`,
+  buildPath = `./dist/${version}`,
   buildPathDev = './dist/dev',
   buildJsFilename = 'bundle',
   buildCssFilename = 'bundle',
 
   meteorPath = './meteor',
-  meteorBundle = `${meteorPath}/lib/chart-tool/scripts`,
+  meteorBundle = `${meteorPath}/imports/modules`,
   meteorSettings = `${meteorBundle}/settings.js`,
   meteorBuildPath = `.${buildPath}/meteor`;
 

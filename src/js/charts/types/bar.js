@@ -1,5 +1,5 @@
 import { select } from 'd3-selection';
-import { axisManager as Axis, setTickFormatY as setLabelFormat } from '../components/axis';
+import { axisManager as Axis, setTickFormat as setLabelFormat } from '../components/axis';
 import { scaleManager as Scale } from '../components/scale';
 import 'd3-selection-multi';
 
@@ -26,7 +26,7 @@ export default function barChart(node, obj) {
     const step = obj.dimensions.barHeight / ((bands.padding * -1) + 1);
     totalBarHeight = (step * obj.data.data.length * obj.data.seriesAmount) - (step * bands.padding) + (step * bands.outerPadding * 2);
     yScale.range([totalBarHeight, 0]);
-    obj.dimensions.yAxisHeight = totalBarHeight;
+    obj.dimensions.yAxisHeight = () => totalBarHeight;
   }
 
   const yAxisObj = new Axis(node, obj, yScale, 'yAxis');
@@ -59,7 +59,7 @@ export default function barChart(node, obj) {
       .attrs({
         'class': `${obj.prefix}bar ${obj.prefix}bar-${i}`,
         'data-series': i,
-        'data-key': d => d.key,
+        'data-key': d => obj.data.inputDateFormat ? d.originalKey : d.key,
         'data-legend': () => obj.data.keys[i + 1],
         'transform': d => `translate(0,${yScale(d.key)})`
       });

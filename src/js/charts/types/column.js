@@ -51,7 +51,7 @@ export default function columnChart(node, obj) {
       .attrs({
         'class': `${obj.prefix}column ${obj.prefix}column-${i}`,
         'data-series': i,
-        'data-key': d => d.key,
+        'data-key': d => obj.data.inputDateFormat ? d.originalKey : d.key,
         'data-legend': () => obj.data.keys[i + 1],
         'transform': d => {
           if (obj.xAxis.scale !== 'ordinal-time') {
@@ -122,14 +122,14 @@ export default function columnChart(node, obj) {
   addZeroLine(obj, node, yAxisObj, 'yAxis');
 
   return {
-    xScaleObj: xScaleObj,
-    yScaleObj: yScaleObj,
-    xAxisObj: xAxisObj,
-    yAxisObj: yAxisObj,
-    seriesGroup: seriesGroup,
-    series: series,
-    singleColumn: singleColumn,
-    columnItems: columnItems
+    xScaleObj,
+    yScaleObj,
+    xAxisObj,
+    yAxisObj,
+    seriesGroup,
+    series,
+    singleColumn,
+    columnItems
   };
 
 }
