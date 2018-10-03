@@ -3500,13 +3500,17 @@
 		ticksSmall: 4,
 		widthThreshold: 420,
 		dy: 0.9,
+		barOffset: 9,
+		tickHeight: 0,
+		textX: 0,
+		textY: 5,
 		upper: {
 			tickHeight: 8,
 			textX: 6,
-			textY: 9
+			textY: 19
 		},
 		lower: {
-			tickHeight: 14,
+			tickHeight: 10,
 			textX: 6,
 			textY: 4
 		}

@@ -13,7 +13,7 @@
 g.ct-x-axis text{
   font-family: "t26-carbon","ff-chambers-sans-web", "t26-carbon",  monospace;
   font-weight: 200;
-  fill: #535B57;
+  fill: $color-gray-dark;
   -moz-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -ms-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
   -o-font-feature-settings:"pnum" 1, "zero" 1, "kern" 1, "liga" 1;
@@ -24,7 +24,7 @@ g.ct-x-axis text{
 g.ct-y-axis text{
   font-family: "t26-carbon","ff-chambers-sans-web", "t26-carbon",  monospace;
   font-weight: 200;
-  fill: #535B57;
+  fill: $color-gray-dark;
   -moz-font-feature-settings:"pnum" 1, "zero" 0, "kern" 1, "liga" 1;
   -ms-font-feature-settings:"pnum" 1, "zero" 0, "kern" 1, "liga" 1;
   -o-font-feature-settings:"pnum" 1, "zero" 0, "kern" 1, "liga" 1;
@@ -82,8 +82,8 @@ text.ct-chart_qualifier-text-bg {
 text.ct-chart_qualifier-text, .ct-chart_qualifier {
   font-weight: 300;
   font-style: normal;
-  fill: #68706C;
-  color: #68706C;
+  fill: $color-gray-medium;
+  color: $color-gray-medium;
   letter-spacing: 0.06rem;
   font-feature-settings: "c2sc", "smcp";
 }
@@ -108,6 +108,7 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
 
 .ct-annotation_text, .ct-annotation_highlight-text {
   text-shadow: 1px 1px 0px $color-white, -1px -1px 0px $color-white, -1px 1px 0px $color-white, 1px -1px 0px $color-white;
+  font-weight: 300;
 }
 
 .domain {
