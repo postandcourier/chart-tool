@@ -1,4 +1,4 @@
-/* Chart Tool v1.4.0-0 | https://github.com/globeandmail/chart-tool | MIT */
+/* Chart Tool v1.4.1-0 | https://github.com/globeandmail/chart-tool | MIT */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
@@ -3422,22 +3422,22 @@
 	  return calendar(year, month, sunday, day, hour, minute, second, millisecond, timeFormat).domain([new Date(2000, 0, 1), new Date(2000, 0, 2)]);
 	}
 
-	var CUSTOM = false;
+	var CUSTOM = true;
 	var prefix$1 = "ct-";
 	var monthsAbr = [
-		"Jan.",
-		"Feb.",
-		"Mar.",
-		"Apr.",
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
 		"May",
 		"June",
 		"July",
-		"Aug.",
-		"Sept.",
-		"Oct.",
-		"Nov.",
-		"Dec.",
-		"Jan."
+		"Aug",
+		"Sept",
+		"Oct",
+		"Nov",
+		"Dec",
+		"Jan"
 	];
 	var debounce = 500;
 	var tipTimeout = 5000;
@@ -3474,14 +3474,14 @@
 		max: "",
 		rescale: false,
 		nice: true,
-		paddingRight: 9,
+		paddingRight: 6,
 		tickLowerBound: 3,
 		tickUpperBound: 8,
 		tickGoal: 5,
 		widthThreshold: 420,
 		dy: "",
 		textX: 0,
-		textY: 0
+		textY: 1
 	};
 	var xAxis = {
 		display: true,
@@ -3496,22 +3496,28 @@
 		rescale: false,
 		nice: false,
 		rangePoints: 1,
-		tickTarget: 6,
+		tickTarget: 5,
 		ticksSmall: 4,
 		widthThreshold: 420,
-		dy: 0.7,
-		barOffset: 9,
-		tickHeight: 7,
-		textX: 6,
-		textY: 7
+		dy: 0.9,
+		upper: {
+			tickHeight: 8,
+			textX: 6,
+			textY: 9
+		},
+		lower: {
+			tickHeight: 14,
+			textX: 6,
+			textY: 4
+		}
 	};
 	var barHeight = 25;
 	var barLabelOffset = 6;
 	var scatterplotRadius = 4;
 	var bands = {
-		padding: 0.12,
-		offset: 0.06,
-		outerPadding: 0.06
+		padding: 0.14,
+		offset: 0.07,
+		outerPadding: 0.07
 	};
 	var social = {
 		facebook: {
@@ -3536,15 +3542,15 @@
 		}
 	};
 	var image = {
-		enable: false,
-		base_path: "",
+		enable: true,
+		base_path: "images",
 		expiration: 30000,
 		filename: "thumbnail",
 		extension: "png",
 		thumbnailWidth: 460
 	};
 
-	var version = "1.4.0";
+	var version = "1.4.1";
 	var buildVer = "0";
 
 	var chartSettings = {
@@ -5451,7 +5457,7 @@
 	}
 
 	// defined in rollup.config.js
-	var bucket = "chartprod";
+	var bucket = "pc-chart-tool";
 
 	var toString$1 = {}.toString;
 
@@ -14659,6 +14665,44 @@
 	  // If you can, it's good Chart Tool practice to return references to newly
 	  // created nodes and d3 objects so they be accessed later — by a dispatcher
 	  // event, for instance.
+
+	  // d3.select(`.${chartRecipe.prefix}bg`)
+	  //   .attr('transform', `translate(0, 0)`)
+	  //   .attr('height', `${chartRecipe.dimensions.height()}`);
+
+	  // console.log(chartRecipe);
+	  // console.log(rendered);
+
+	  function moveToBack( nodeToMove ) {
+	    // get the actual DOM node for the container selection
+	    var theContainer = rendered.container.node();
+
+	    theContainer.removeChild(nodeToMove);
+	    theContainer.insertBefore(nodeToMove, theContainer.firstChild);
+	  }
+
+	  if (rendered.plot.xAxisObj) {
+	    moveToBack(rendered.plot.xAxisObj.node.node());
+	  }
+
+
+	  if ( chartRecipe.options.type === 'area' ) {
+	    console.log("custom.js | Area chart detected!");
+
+	    // send the series behind the axes for an area chart
+	    moveToBack( rendered.plot.seriesGroup.node() );
+	  }
+
+
+	  if ( rendered.plot.xAxisObj ) {
+	    var xAxis = rendered.plot.xAxisObj.node;
+
+	    node.selectAll('.ct-x-axis .tick line').attr('y1', chartRecipe.dimensions.yAxisHeight() * -1 );
+	  }
+
+	  //rendered.plot.xAxisObj.axis.tickSizeInner(-300);
+	  //rendered.plot.xAxisObj.axis.tickSizeInner(0);
+
 	  return;
 
 	}

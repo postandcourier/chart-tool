@@ -88,8 +88,26 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
   font-feature-settings: "c2sc", "smcp";
 }
 .ct-yAxis g.tick line, .ct-xAxis g.tick line {
-  stroke: #e0e3e5;
+  stroke: #262B28;
+  opacity: 0.08;
   shape-rendering: crispEdges;
+}
+
+.ct-annotation_range {
+  fill: #262B28;
+  opacity: 0.1;
+}
+
+.ct-annotation_range-line {
+  opacity: 0.6;
+}
+
+.ct-pointer-handle-path, .ct-pointer-path {
+  opacity: 1;
+}
+
+.ct-annotation_text, .ct-annotation_highlight-text {
+  text-shadow: 1px 1px 0px $color-white, -1px -1px 0px $color-white, -1px 1px 0px $color-white, 1px -1px 0px $color-white;
 }
 
 .domain {

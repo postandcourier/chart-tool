@@ -5,8 +5,11 @@
 $margin: 3em 0 4em 0;
 //
 // Fonts
+
+@import url("https://use.typekit.net/wlb0tlz.css");
+
 $heading-font-family: "adelle-sans", 'Helvetica';
-$heading-font-weight: 700;
+$heading-font-weight: 800;
 $heading-font-style: normal;
 $heading-font-size: 16px;
 $heading-font-line-height: 1.2;
@@ -16,6 +19,15 @@ $utility-font-weight: 300;
 $utility-font-style: normal;
 $utility-font-size: 12px;
 $utility-font-line-height: 15px;
+
+$interface-font-light: "adelle-sans", 'Helvetica', Arial, sans-serif;
+$interface-font-regular: "adelle-sans", 'Helvetica', Arial, sans-serif;
+$interface-font-bold: "adelle-sans", 'Helvetica', Arial, sans-serif;
+$interface-font-black: "adelle-sans", 'Helvetica', Arial, sans-serif;
+
+body {
+  background-color: #F3F4F2;
+}
 
 @mixin heading-font {
   font-family: $heading-font-family;

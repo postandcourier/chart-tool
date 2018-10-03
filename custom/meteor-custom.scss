@@ -6,6 +6,19 @@
 //   stroke-width: 1px;
 // }
 
+header {
+  background-color: $oneup-shade-1;
+  color: $color-white;
+}
+
+header .topbar {
+  background-color: $oneup-shade-2;
+}
+
+.header-new a, .header-list a, .header-help a {
+  color: $color-white;
+}
+
 @function ptToPx($pt) {
   $magic: 96 / 72;
   $val: ($pt * $magic) * 1px;

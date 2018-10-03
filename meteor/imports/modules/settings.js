@@ -1,6 +1,20 @@
 var CUSTOM = true;
-var prefix$1 = "ct-";
-var monthsAbr = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec","Jan"];
+var prefix = "ct-";
+var monthsAbr = [
+	"Jan",
+	"Feb",
+	"Mar",
+	"Apr",
+	"May",
+	"June",
+	"July",
+	"Aug",
+	"Sept",
+	"Oct",
+	"Nov",
+	"Dec",
+	"Jan"
+];
 var debounce = 500;
 var tipTimeout = 5000;
 var ratioMobile = 1.15;
@@ -37,14 +51,14 @@ var yAxis = {
 	max: "",
 	rescale: false,
 	nice: true,
-	paddingRight: 9,
+	paddingRight: 6,
 	tickLowerBound: 3,
 	tickUpperBound: 8,
 	tickGoal: 5,
 	widthThreshold: 420,
 	dy: "",
 	textX: 0,
-	textY: 0
+	textY: 1
 };
 var xAxis = {
 	display: true,
@@ -59,26 +73,32 @@ var xAxis = {
 	rescale: false,
 	nice: false,
 	rangePoints: 1,
-	tickTarget: 6,
+	tickTarget: 5,
 	ticksSmall: 4,
 	widthThreshold: 420,
-	dy: 0.7,
-	barOffset: 9,
-	tickHeight: 7,
-	textX: 6,
-	textY: 7
+	dy: 0.9,
+	upper: {
+		tickHeight: 8,
+		textX: 6,
+		textY: 9
+	},
+	lower: {
+		tickHeight: 14,
+		textX: 6,
+		textY: 4
+	}
 };
 var barHeight = 25;
 var barLabelOffset = 6;
 var scatterplotRadius = 4;
 var bands = {
-	padding: 0.12,
-	offset: 0.06,
-	outerPadding: 0.06
+	padding: 0.14,
+	offset: 0.07,
+	outerPadding: 0.07
 };
 var source = {
-	prefix: "CHART TOOL",
-	suffix: " » SOURCE:"
+	prefix: "The Post and Courier",
+	suffix: " |"
 };
 var social = {
 	facebook: {
@@ -103,15 +123,15 @@ var social = {
 	}
 };
 var image = {
-	enable: false,
-	base_path: "",
+	enable: true,
+	base_path: "images",
 	expiration: 30000,
 	filename: "thumbnail",
 	extension: "png",
 	thumbnailWidth: 460
 };
-var embedJS = "http://globeandmail.github.io/{{version}}/chart-tool.min.js";
-var embedCSS = "http://globeandmail.github.io/{{version}}/chart-tool.min.css";
+var embedJS = "//www.postandcourier.com/app/js/chart-tool/chart-tool.js";
+var embedCSS = "//www.postandcourier.com/app/js/chart-tool/chart-tool.css";
 var config = {
 	CUSTOM: CUSTOM,
 	prefix: prefix,
@@ -141,7 +161,7 @@ var config = {
 };
 
 var name = "chart-tool";
-var version = "1.4.0";
+var version = "1.4.1";
 var buildVer = "0";
 
 var app_version = version;

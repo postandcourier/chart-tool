@@ -49,9 +49,9 @@
     "nice": true,
 
     "paddingRight": 6,
-    "tickLowerBound": 1,
+    "tickLowerBound": 3,
     "tickUpperBound": 8,
-    "tickGoal": 4,
+    "tickGoal": 5,
     "widthThreshold": 420,
     "dy": "",
     "textX": 0,
@@ -75,11 +75,17 @@
     "tickTarget": 5,
     "ticksSmall": 4,
     "widthThreshold": 420,
-    "dy": 0.8,
-    "barOffset": 9,
-    "tickHeight": 7,
-    "textX": 6,
-    "textY": 7
+    "dy": 0.9,
+    "upper": {
+      "tickHeight": 8,
+      "textX": 6,
+      "textY": 9
+    },
+    "lower": {
+      "tickHeight": 14,
+      "textX": 6,
+      "textY": 4
+    }
   },
 
   "barHeight": 25,
@@ -94,7 +100,7 @@
 
   "source": {
     "prefix": "The Post and Courier",
-    "suffix": " | SOURCE: "
+    "suffix": " |"
   },
 
   "social": {
