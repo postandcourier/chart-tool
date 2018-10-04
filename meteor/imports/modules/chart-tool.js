@@ -7048,6 +7048,7 @@
 	    stackedData = stackFn(range(data.length).map(function (i) {
 	      var o = {};
 	      o[keys[0]] = data[i].key;
+	      o.originalKey = data[i].originalKey;
 	      for (var j = 0; j < data[i].series.length; j++) {
 	        if (!data[i].series[j].val || data[i].series[j].val === '__undefined__') {
 	          o[data[i].series[j].key] = '0';
@@ -10532,9 +10533,7 @@
 	      if (obj.data.seriesAmount > 1) { output += " " + (obj.prefix) + "multiple"; }
 	      return output;
 	    })
-	    .attr('transform', function () {
-	      return ("translate(" + (obj.dimensions.computedWidth() - obj.dimensions.tickWidth()) + ",0)");
-	    });
+	    .attr('transform', ("translate(" + (obj.dimensions.computedWidth() - obj.dimensions.tickWidth()) + ",0)"));
 
 	  var series = seriesGroup.selectAll(("g." + (obj.prefix) + "series"))
 	    .data(obj.data.stackedData)
@@ -10552,7 +10551,7 @@
 	    .data(function (d) { return d; })
 	    .enter().append('rect')
 	    .attrs({
-	      'data-key': function (d) { return d.data[obj.data.keys[0]]; },
+	      'data-key': function (d) { return obj.data.inputDateFormat ? d.data.originalKey : d.data[obj.data.keys[0]]; },
 	      'x': function (d) { return xScale(d.data[obj.data.keys[0]]); },
 	      'y': function (d) { return yScale(Math.max(0, d[1])); },
 	      'height': function (d) { return Math.abs(yScale(d[1]) - yScale(d[0])); },
@@ -10652,7 +10651,7 @@
 	  event.stopImmediatePropagation();
 	}
 
-	function nodrag(view) {
+	function dragDisable(view) {
 	  var root = view.document.documentElement,
 	      selection$$1 = select(view).on("dragstart.drag", noevent, true);
 	  if ("onselectstart" in root) {
@@ -10749,7 +10748,7 @@
 	    var gesture = beforestart("mouse", container.apply(this, arguments), mouse, this, arguments);
 	    if (!gesture) return;
 	    select(event.view).on("mousemove.drag", mousemoved, true).on("mouseup.drag", mouseupped, true);
-	    nodrag(event.view);
+	    dragDisable(event.view);
 	    nopropagation();
 	    mousemoving = false;
 	    mousedownx = event.clientX;
@@ -11209,7 +11208,7 @@
 	          .on("mousemove.brush", moved, true)
 	          .on("mouseup.brush", ended, true);
 
-	      nodrag(event.view);
+	      dragDisable(event.view);
 	    }
 
 	    nopropagation$1();
@@ -13546,8 +13545,11 @@
 	    start = Number(rangeObj.start);
 	    if ('end' in rangeObj) { end = Number(rangeObj.end); }
 	  } else {
-	    start = new Date(rangeObj.start);
-	    if ('end' in rangeObj) { end = new Date(rangeObj.end); }
+	    var dateFormat = timeParse(obj.data.inputDateFormat);
+	    start = dateFormat(rangeObj.start);
+	    if ('end' in rangeObj) { end = dateFormat(rangeObj.end); }
+	    // start = new Date(rangeObj.start);
+	    // if ('end' in rangeObj) end = new Date(rangeObj.end);
 	  }
 
 	  var attrs = {
@@ -13583,7 +13585,7 @@
 	  } else {
 	    type = 'line';
 
-	    // cancels out offsetting for leftmost column)
+	    // cancels out offsetting for leftmost column
 	    var sameStarts = new Date(start).toString() === scale.domain()[0].toString();
 	    if (isColumnAndX && sameStarts) { offset = 0; }
 	    attrs.x1 = rangeObj.axis === 'x' ? scale(start) + offset : 0;
@@ -13639,7 +13641,8 @@
 
 	  var scale = obj.rendered.plot[((obj.annotationHandlers.rangeAxis) + "ScaleObj")].scale,
 	    scaleType = obj.rendered.plot[((obj.annotationHandlers.rangeAxis) + "ScaleObj")].obj.type,
-	    isTime = scaleType === 'time' || scaleType === 'ordinal-time';
+	    isTime = scaleType === 'time' || scaleType === 'ordinal-time',
+	    dateFormat = isTime ? timeParse(obj.data.inputDateFormat) : function (x) { return x; };
 
 	  if (hasRangePassedFromInterface) {
 	    var move;
@@ -13651,13 +13654,13 @@
 	    var offset = isColumnAndX ? obj.rendered.plot.singleColumn : 0;
 
 	    if (obj.annotationHandlers.rangeType === 'line') {
-	      var sameStarts = new Date(start).toString() === scale.domain()[0].toString();
+	      var sameStarts = dateFormat(start).toString() === scale.domain()[0].toString();
 	      if (isColumnAndX && sameStarts) { offset = 0; }
-	      move = getBrushFromCenter(obj, scale(isTime ? new Date(start) : Number(start)) + offset);
+	      move = getBrushFromCenter(obj, scale(isTime ? dateFormat(start) : Number(start)) + offset);
 	    } else {
 	      move = [
-	        scale(isTime ? new Date(start) : Number(start)),
-	        scale(isTime ? new Date(end) : Number(end)) + offset
+	        scale(isTime ? dateFormat(start) : Number(start)),
+	        scale(isTime ? dateFormat(end) : Number(end)) + offset
 	      ];
 
 	    }
@@ -13777,7 +13780,10 @@
 	  }
 
 	  if (scaleObj.obj.type === 'time' || scaleObj.obj.type === 'ordinal-time') {
-	    fn = function (d) { return getTipData(obj, { x: d }).key; };
+	    fn = function (d) {
+	      var data = getTipData(obj, { x: d });
+	      return data.originalKey || data.key;
+	    };
 	  }
 
 	  return fn;
