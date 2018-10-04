@@ -63,7 +63,7 @@ body {
 
 // // Color palettes
 $primary-color: #1D8ACB;
-$primary-shade-1: #E04D69;
+$primary-shade-1: #F15062;
 $primary-shade-2: #393F3C;
 $primary-shade-3: #1CAECC;
 $primary-shade-4: #F2734F;
@@ -72,7 +72,7 @@ $primaryShades: $primary-color, $primary-shade-1, $primary-shade-2, $primary-sha
 $alternate-color: #1CAECC;
 $alternate-shade-1: #1d8acb;
 $alternate-shade-2: #9264ba;
-$alternate-shade-3: #f15062;
+$alternate-shade-3: #F15062;
 $alternate-shade-4: #F2734F;
 $alternateShades: $alternate-color, $alternate-shade-1, $alternate-shade-2, $alternate-shade-3, $alternate-shade-4;
 
@@ -83,14 +83,14 @@ $grayscale-shade-3: #7B8C83;
 $grayscale-shade-4: #AFBFB6;
 $grayscaleShades: $grayscale-color, $grayscale-shade-1, $grayscale-shade-2, $grayscale-shade-3, $grayscale-shade-4;
 
-$oneup-color: #E04D69;
+$oneup-color: #F15062;
 $oneup-shade-1: #262B28;
 $oneup-shade-2: #59665F;
 $oneup-shade-3: #96A59D;
 $oneup-shade-4: #AFBFB6;
 $oneupShades: $oneup-color, $oneup-shade-1, $oneup-shade-2, $oneup-shade-3, $oneup-shade-4;
 
-$twoup-color: #E04D69;
+$twoup-color: #F15062;
 $twoup-shade-1: #1D8ACB;
 $twoup-shade-2: #262B28;
 $twoup-shade-3: #7B8C83;
@@ -108,11 +108,11 @@ $palettes: $primaryShades, $alternateShades, $grayscaleShades, $oneupShades, $tw
  $color-gray-light: #EBECEB;
  $color-white: #F3F4F2;
 
- $color-red: #DA161F;
- $color-orange: #FF6B00;
- $color-green: #50AA30;
- $color-blue: #29639C;
- $color-yellow: #F8E71C;
+ $color-red: #F15062;
+ $color-orange: #F2734F;
+ $color-green: #82C566;
+ $color-blue: #1D8ACB;
+ $color-yellow: #F0DD67;
  $color-beige: #FFF8E7;
  $color-red-bright: #F90611;
 
