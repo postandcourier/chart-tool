@@ -187,16 +187,22 @@ var app_settings = {
   palettes: ['Primary', 'Alternate', 'Grayscale', 'first-one', 'first-two'],
 
   highlightOptions: [
-    '#1f77b4',
-    '#ff7f0e',
-    '#bcbd22',
-    '#8c564b',
-    '#7f7f7f',
-    '#6b6ecf',
-    '#b5cf6b',
-    '#e7ba52',
-    '#d6616b',
-    '#ce6dbd'
+    '#F15062',
+    '#1D8ACB',
+    '#1CAECC',
+    '#9264BA',
+    '#F2734F',
+    '#F0DD67',
+    '#82C566',
+    '#178FA7',
+    '#785299',
+    '#C75F41',
+    '#C5B555',
+    '#6BA254',
+    '#262B28',
+    '#2F3531',
+    '#535B57',
+    '#68706C'
   ],
 
   help: 'https://github.com/globeandmail/chart-tool/tree/master/README.md',
