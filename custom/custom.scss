@@ -104,11 +104,22 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
 
 .ct-pointer-handle-path, .ct-pointer-path {
   opacity: 1;
+  stroke: $color-gray-dark;
+}
+
+#ct-arrow {
+  fill: $color-gray-dark;
 }
 
 .ct-annotation_text, .ct-annotation_highlight-text {
-  text-shadow: 1px 1px 0px $color-white, -1px -1px 0px $color-white, -1px 1px 0px $color-white, 1px -1px 0px $color-white;
-  font-weight: 300;
+  //text-shadow: 1px 1px 0px $color-white, -1px -1px 0px $color-white, -1px 1px 0px $color-white, 1px -1px 0px $color-white;
+  font-weight: 600;
+  stroke: $color-white;
+  stroke-width: 1.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: $color-gray-dark;
+  paint-order: stroke fill;
 }
 
 .domain {
