@@ -112,7 +112,7 @@ text.ct-chart_qualifier-text, .ct-chart_qualifier {
 }
 
 .ct-annotation_text, .ct-annotation_highlight-text {
-  //text-shadow: 1px 1px 0px $color-white, -1px -1px 0px $color-white, -1px 1px 0px $color-white, 1px -1px 0px $color-white;
+  text-shadow: none;
   font-weight: 600;
   stroke: $color-white;
   stroke-width: 1.8px;
